@@ -1,0 +1,66 @@
+---
+id: HowWriteMDX
+title: چگونه mdx بنویسیم
+---
+
+### برای اینکار به صورت زیر عمل میکنیم:
+
+1. یک فایل در فولدر `docs` با فرمت mdx می سازیم
+2. حال داخل آن باید یک id و یک title برای آن بنویسیم
+
+<div dir="ltr">
+
+    ```
+    id: mdx
+    title: Powered by MDX
+    ```
+
+</div>
+
+3. حال id نوشته شده را در فایل `sidebars.js` درون یکی از دسته بندی ها می نویسیم
+حال id نوشته شده را در فایل
+<code>sidebars.js</code>
+درون یکی از دسته بندی ها می نویسیم
+
+4. همچنین می توان به صورت زیر نیز یک کامپوننت دلخواه ساخته و آرگومان ورودی های خاص به آن بدهیم تا استایل مورد نظر رای متن های خود بدهیم
+
+<div dir="ltr">
+
+    ```
+    export const Highlight = ({children, color}) => (
+    <span style={{
+        backgroundColor: color,
+        borderRadius: '2px',
+        color: '#fff',
+        padding: '0.2rem',
+    }}>{children}</span> );
+
+    <Highlight color="#25c2a0">Docusaurus green</Highlight> and <Highlight color="#1877F2">Facebook blue</Highlight> are
+    my favorite colors.
+    ```
+
+</div>
+
+نتیجه آن کد پایین می باشد:
+
+export const Highlight = ({children, color}) => (
+    <span style={{
+        backgroundColor: color,
+        borderRadius: '2px',
+        color: '#fff',
+        padding: '0.2rem',
+    }}>{children}</span>);
+
+<Highlight color="#25c2a0">Docusaurus green</Highlight> and <Highlight color="#1877F2">Facebook
+    blue</Highlight> are my favorite colors.
+
+I can write **Markdown** alongside my _JSX_!
+
+5. برای اینکه در سمت راست لینک ها عنوان نمایش داده شود، باید از h2 یا h3 استفاده کنیم که با # نوشته می شود
+
+<div dir="ltr">
+
+    ## h2
+    ### h3
+
+</div>
