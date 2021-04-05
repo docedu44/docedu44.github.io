@@ -1,0 +1,121 @@
+---
+id: tailwind-next
+title: نصب Tailwind
+---
+
+### نصب Tailwind در Next
+
+ابتدا از دستورات زیر برای نصب برروی ورژن های مختلف Next استفاده می کنیم:
+
+<div dir="ltr">
+
+    # If you're on Next.js v10
+    npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+
+    # If you're on Next.js v9 or older
+    npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+
+</div>
+
+### ساخت فایل کانفیگ Tailwind و Postcss
+
+توسط دستور زیر می توان فایل کانفیگ، همراه با کد  های پیش فرض آن را ساخت
+
+<div dir="ltr">
+
+    npx tailwindcss init -p
+
+</div>
+<small>فلگ p برای ساخت فایل کانفیگ postcss می باشد</small>
+
+که در فایل tailwind.config.js و postcss.config.js به ترتیب، کد های زیر به صورت پیش فرض موجود می باشد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+    purge: [],
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+    extend: {},
+    },
+    variants: {
+    extend: {},
+    },
+    plugins: [],
+    }
+```
+
+</div>
+<div dir="ltr">
+
+```javascript
+    // postcss.config.js
+    module.exports = {
+    plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+    },
+    }
+```
+
+</div>
+
+### حذف استایل های استفاده نشده در Tailwind
+می توان از کد های زیر برای حذف استایل های استفاده نشده استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+    purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+    extend: {},
+    },
+    variants: {
+    extend: {},
+    },
+    plugins: [],
+    }
+```
+
+</div>
+
+### اضافه کردن Tailwind به پروژه
+برای اینکار می توان به 2 صورت زیر عمل کرد:
+1. اضافه کردن مستقیم Tailwind به app.js
+
+<div dir="ltr">
+
+```javascript
+    // pages/_app.js
+    import 'tailwindcss/tailwind.css'
+
+    function MyApp({ Component, pageProps }) {
+    return <Component {...pageProps} />
+    }
+
+    export default MyApp
+```
+
+</div>
+
+2. اضافه کردن Tailwind به globals.css
+در این روش از directive های خود Tailwind استفاده می کنیم که هنگام build، تبدیل می شوند
+
+<div dir="ltr">
+
+```css
+    /* ./styles/globals.css */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+```
+
+</div>
+منبع:
+
+[tailwindcss.com/docs/guides/nextjs](https://tailwindcss.com/docs/guides/nextjs)

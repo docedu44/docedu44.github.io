@@ -1,0 +1,287 @@
+---
+id: hover-focus-etc
+title: هاور، فوکس و ...
+---
+
+مانند رسپانسیوی، برای hover, focus و ... می توان از پیشوند های آن ها استفاده کرد و استایل مورد نظر را در کلاس کاذب مورد نظر بدهیم
+
+### پیشوند Hover
+
+به صورت زیر رعمل میکند:
+
+<div dir="ltr">
+
+```html
+    <button className="bg-red-500 hover:bg-red-700 ...">
+        Hover me
+    </button>
+```
+
+</div>
+
+**Hover** به صورت پیش فرض برای پلاگین های زیر عمل میکند
+
+`backgroundColor` <br/>
+`backgroundOpacity` <br/>
+`borderColor` <br/>
+`borderOpacity` <br/>
+`boxShadow` <br/>
+`gradientColorStops` <br/>
+`opacity` <br/>
+`rotate` <br/>
+`scale` <br/>
+`skew` <br/>
+`textColor` <br/>
+`textDecoration` <br/>
+`textOpacity` <br/>
+`translate` <br/>
+
+برای اضافه کردن پلاگین مورد نظر برای **Hover** میتوان از کد های زیر استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+        module.exports = {
+        // ...
+            variants: {
+                extend: {
+                    padding: ['hover'],
+                }
+            },
+        }
+```
+
+</div>
+
+### پیشوند Focus
+
+به صورت زیر رعمل میکند:
+
+<div dir="ltr">
+
+```html
+    <input className="focus:ring-2 focus:ring-blue-600 ..."/>
+```
+
+</div>
+
+**Focus** به صورت پیش فرض برای پلاگین های زیر عمل میکند
+
+`accessibility` <br/>
+`backgroundColor` <br/>
+`backgroundOpacity` <br/>
+`borderColor` <br/>
+`borderOpacity` <br/>
+`boxShadow` <br/>
+`gradientColorStops` <br/>
+`opacity` <br/>
+`outline` <br/>
+`placeholderColor` <br/>
+`placeholderOpacity` <br/>
+`ringColor` <br/>
+`ringOffsetColor` <br/>
+`ringOffsetWidth` <br/>
+`ringOpacity` <br/>
+`ringWidth` <br/>
+`rotate` <br/>
+`scale` <br/>
+`skew` <br/>
+`textColor` <br/>
+`textDecoration` <br/>
+`textOpacity` <br/>
+`translate` <br/>
+`zIndex` <br/>
+
+برای اضافه کردن پلاگین مورد نظر برای **Focus** میتوان از کد های زیر استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+        // ...
+        variants: {
+            extend: {
+                maxHeight: ['focus'],
+            }
+        },
+    }
+```
+
+</div>
+
+### پیشوند Active
+
+به صورت زیر رعمل میکند:
+
+<div dir="ltr">
+
+```html
+    <button className="bg-green-500 active:bg-green-700 ...">
+        Click me
+    </button>
+```
+
+</div>
+
+**Active** به صورت پیش فرض برای هیچ پلاگینی وجود ندارد و باید بر حسب نیاز آن را اضافه کنیم
+
+برای اضافه کردن پلاگین مورد نظر برای **Active** میتوان از کد های زیر استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+        // ...
+        variants: {
+            extend: {
+                backgroundColor: ['active'],
+            }
+        },
+    }
+```
+
+</div>
+
+### پیشوند Group-hover
+
+هر وقت بخواهیم یک استایل را هنگام Hover شدن والد چند المان، به آن ها اختصاص دهیم، می توانیم به والد المان های مورد نظر کلاس `group` را بدهیم و به هرکدام از المان های فرزند، پیشوند `group-hover` را بدهیم و سپس استایل مورد نظر را اعمال کنیم:
+
+<div dir="ltr">
+
+```html
+    <div className="group border-indigo-500 hover:bg-white hover:shadow-lg hover:border-transparent ...">
+        <p className="text-indigo-600 group-hover:text-gray-900 ...">New Project</p>
+        <p className="text-indigo-500 group-hover:text-gray-500 ...">Create a new project from a variety of starting templates.</p>
+    </div>
+```
+
+</div>
+
+**Group-hover** به صورت پیش فرض برای پلاگین های زیر عمل میکند
+
+`backgroundColor` <br/>
+`backgroundOpacity` <br/>
+`borderColor` <br/>
+`borderOpacity` <br/>
+`boxShadow` <br/>
+`opacity` <br/>
+`textColor` <br/>
+`textDecoration` <br/>
+`textOpacity` <br/>
+
+برای اضافه کردن پلاگین مورد نظر برای **Group-hover** میتوان از کد های زیر استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+        // ...
+        variants: {
+            extend: {
+                divideColor: ['group-hover'],
+            }
+        },
+    }
+```
+
+</div>
+
+### پیشوند Group-focus
+
+هر وقت بخواهیم یک استایل را هنگام Hover شدن والد چند المان، به آن ها اختصاص دهیم، می توانیم به والد المان های مورد نظر کلاس `group` را بدهیم و به هرکدام از المان های فرزند، پیشوند `group-focus` را بدهیم و سپس استایل مورد نظر را اعمال کنیم:
+
+<div dir="ltr">
+
+```html
+    <button className="group bg-yellow-500 focus:bg-yellow-600 ...">
+        <svg className="text-white group-focus:text-yellow-300 ..."></svg>
+        Bookmark
+    </button>
+```
+
+</div>
+
+**Group-focus** به صورت پیش فرض برای هیچ پلاگینی وجود ندارد و باید بر حسب نیاز آن را اضافه کنیم
+
+برای اضافه کردن پلاگین مورد نظر برای **Group-focus** میتوان از کد های زیر استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+        // ...
+        variants: {
+            extend: {
+                backgroundColor: ['group-focus'],
+            }
+        },
+    }
+```
+
+</div>
+
+### پیشوند Focus-within
+
+زمانی که بخواهیم هنگام Focus شدن یک المان فرزند، استایلی به المان والد بدهیم، از `Focus-within` استفاده می کنیم
+
+<div dir="ltr">
+
+```html
+    <form>
+        <div className="text-gray-400 focus-within:text-gray-600 ...">
+            <div className="...">
+                <svg fill="currentColor"></svg>
+            </div>
+            <input className="focus:ring-2 focus:ring-gray-300 ..."/>
+        </div>
+    </form>
+```
+
+</div>
+
+**Focus-within** به صورت پیش فرض برای پلاگین های زیر عمل میکند
+
+`accessibility` <br/>
+`backgroundColor` <br/>
+`backgroundOpacity` <br/>
+`borderColor` <br/>
+`borderOpacity` <br/>
+`boxShadow` <br/>
+`opacity` <br/>
+`outline` <br/>
+`ringColor` <br/>
+`ringOffsetColor` <br/>
+`ringOffsetWidth` <br/>
+`ringOpacity` <br/>
+`ringWidth` <br/>
+`textColor` <br/>
+`textDecoration` <br/>
+`textOpacity` <br/>
+`zIndex` <br/>
+
+برای اضافه کردن پلاگین مورد نظر برای **Focus-within** میتوان از کد های زیر استفاده کرد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+        // ...
+        variants: {
+            extend: {
+                scale: ['focus-within'],
+            }
+        },
+    }
+```
+
+</div>
+
+منبع:
+
+[tailwindcss.com/docs/responsive-design](https://tailwindcss.com/docs/responsive-design)

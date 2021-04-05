@@ -1,0 +1,87 @@
+---
+id: responsive
+title: رسپانسیویی
+---
+
+### جدول breakpoint ها
+
+در Tailwind ما 5 breakpoint داریم
+
+<div dir="ltr">
+
+Breakpoint پیشوند | Minimum width | css
+------------ | ------------- | -------------
+`sm` | 640px | `@media (min-width: 640px) {  }`
+`md` | 768px | `@media (min-width: 768px) {  }`
+`lg` | 1024px | `@media (min-width: 1024px) {  }`
+`xl` | 1280px | `@media (min-width: 1280px) {  }`
+`2xl` | 1536px | `@media (min-width: 1536px) {  }`
+
+</div>
+
+قبل از تمامی کلاس های tailwind می توان از پیشوند این breakpoint ها استفاده کرد که با علامت **`:`** پیشوند را از کلاس جدا می کنیم
+
+<div dir="ltr">
+
+```html
+<!-- Width of 16 by default, 32 on medium screens, and 48 on large screens -->
+<img className="w-16 md:w-32 lg:w-48" src="..."/>
+```
+
+</div>
+
+### mobile first
+به صورت پیش فرض، Tailwind به صورت Mobile First می باشد
+یعنی برای حالت موبایل نیازی به نوشتن پیشوند Breakpoint نمی باشد ( مانند Bootstrap )
+و کلاس داده شده در هر Breakpoint، در همان Breakpoint و اندازه های بالا تر اعمال می شود
+
+__برای حالت موبایل از `sm` استفاده نشود__
+
+<div dir="ltr">
+
+```html
+    <!-- فقط نوشته های صفحه نمایش های 640 به بالا را وسط قرار می دهد و در صفحه نمایش های کوچک تر اعمال نمی شود -->
+    <div class="sm:text-center"></div>
+```
+
+</div>
+
+__شکل درست__
+
+<div dir="ltr">
+
+```html
+    <!-- در صفحه نمایش های کوچک، نوشته ها در وسط و در صفحه نمایش هایی با اندازه 640 به بالا در سمت چپ -->
+    <div class="text-center sm:text-left"></div>
+```
+
+</div>
+
+### تغییر Breakpoint ها از حالت پیش فرض
+
+می توان در فایل tailwind.config.js حالت پیش فرض Breakpoint ها را به سایز های دلخواه تغییر داد:
+
+<div dir="ltr">
+
+```javascript
+    // tailwind.config.js
+    module.exports = {
+        theme: {
+            screens: {
+                'tablet': '640px',
+                // => @media (min-width: 640px) { ... }
+
+                'laptop': '1024px',
+                // => @media (min-width: 1024px) { ... }
+
+                'desktop': '1280px',
+                // => @media (min-width: 1280px) { ... }
+            },
+        }
+    }
+```
+
+</div>
+منبع:
+
+[tailwindcss.com/docs/responsive-design](https://tailwindcss.com/docs/responsive-design)

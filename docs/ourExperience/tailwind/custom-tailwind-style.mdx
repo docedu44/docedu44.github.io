@@ -1,0 +1,35 @@
+---
+id: custom-tailwind-style
+title: تکرار کلاس ها
+---
+
+### جلوگیری از تکرار کلاس ها
+بعصی وقت ها ما مثلا یک دکمه داریم که در چند کامپوننت ظاهر یکسانی دارند که برای جلوگیری از تکرار این کلاس ها می توان از دایرکتیو **@apply** استفاده کنیم:
+
+<div dir="ltr">
+
+```html
+    <!-- Using utilities -->
+    <button className="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
+        Click me
+    </button>
+
+    <!-- Extracting classes using @apply -->
+    <button className="btn btn-green">
+        Button
+    </button>
+
+    <style>
+        .btn {
+            @apply py-2 px-4 font-semibold rounded-lg shadow-md;
+        }
+        .btn-green {
+            @apply text-white bg-green-500 hover:bg-green-700;
+        }
+    </style>
+```
+
+</div>
+منبع:
+
+[tailwindcss.com/docs/utility-first](https://tailwindcss.com/docs/utility-first)
