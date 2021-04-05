@@ -12,6 +12,14 @@ module.exports = {
                     'ourExperience/tailwind/hover-focus-etc',
                 ],
             },
+          {
+            type: 'category',
+            label: 'PWA',
+            items: [
+              'ourExperience/PWA/pwa',
+              'ourExperience/PWA/pwa_react',
+            ],
+          },
         ],
         "داکیومنت های شرکت": [
             "hami/test",
