@@ -4,6 +4,28 @@ module.exports = {
             "ourExperience/HowWriteMDX",
             {
                 type: 'category',
+                label: 'Docker',
+                items: [
+                    'ourExperience/docker/docker-mf',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'PWA',
+                items: [
+                    'ourExperience/PWA/pwa',
+                    'ourExperience/PWA/pwa_react',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'redux tool kit',
+                items: [
+                    'ourExperience/redux-tool-kit/reduxtoolkit',
+                ],
+            },
+            {
+                type: 'category',
                 label: 'Tailwind in Next.js',
                 items: [
                     'ourExperience/tailwind/tailwind-next',
@@ -12,14 +34,6 @@ module.exports = {
                     'ourExperience/tailwind/hover-focus-etc',
                 ],
             },
-          {
-            type: 'category',
-            label: 'PWA',
-            items: [
-              'ourExperience/PWA/pwa',
-              'ourExperience/PWA/pwa_react',
-            ],
-          },
         ],
         "داکیومنت های شرکت": [
             "hami/test",
