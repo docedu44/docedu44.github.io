@@ -1,0 +1,78 @@
+---
+id: reduxtoolkit
+title: redux tool kit
+author: sina
+---
+
+این کد با تایپ اسکریپت عه. منطقا تایپ هاش رو پاک کنید میشه جاوااسکریپت :)
+
+<div dir="ltr">
+
+```typescript
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../store'
+
+interface IUser {
+    loading: boolean,
+    error: any,
+    user: Object
+}
+
+const userInitialState: IUser = {
+    loading: false,
+    error: null,
+    user: {}
+}
+
+export const fetchRandomUser = createAsyncThunk(
+    'user/fetchRandomUser',
+    async () => {
+        try {
+            const response = await fetch('https://randomuser.me/api')
+            const data = await response.json()
+            return data.results[0]
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+)
+
+export const userSclice = createSlice({
+    name: 'user',
+    initialState: userInitialState,
+    reducers: {
+        logout: (state) => {
+            state.user = {}
+            state.error = null
+            state.loading = false
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchRandomUser.pending, (state, action) => {
+                state.loading = true
+            })
+            .addCase(fetchRandomUser.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+            })
+            .addCase(fetchRandomUser.fulfilled, (state, action) => {
+                state.loading = false
+                state.user = action.payload
+            })
+    }
+})
+
+export const { logout } = userSclice.actions
+
+export const useUser = (state: RootState) => state.user
+
+export default userSclice.reducer
+
+```
+
+</div>
+
+
+اسمی که برای reducers میذارید در واقع اسم اکشن هاس.
+اگر اکشن نیاز به payload داره تو ریدوسر یه پارامتر action هم بهش پاس بدید. در غیر این صورت نیازی نیست.
