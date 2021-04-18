@@ -42,6 +42,22 @@ module.exports = {
                 ],
             },
         ],
+        "زبان": [
+            {
+                type: 'category',
+                label: 'Words',
+                items: [
+                    'ourExperience/programming-words/programming-words',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'ABBR',
+                items: [
+                    'ourExperience/programming-abbr/programming-abbr',
+                ],
+            },
+        ],
         "داکیومنت های شرکت": [
             "hami/test",
         ],
