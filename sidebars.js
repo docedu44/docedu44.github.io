@@ -45,6 +45,13 @@ module.exports = {
         "زبان": [
             {
                 type: 'category',
+                label: 'Grammar',
+                items: [
+                    'ourExperience/english/grammar',
+                ],
+            },
+            {
+                type: 'category',
                 label: 'Words',
                 items: [
                     'ourExperience/programming-words/programming-words',
