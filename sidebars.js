@@ -47,21 +47,21 @@ module.exports = {
                 type: 'category',
                 label: 'Grammar',
                 items: [
-                    'ourExperience/english/grammar',
+                    'ourExperience/english/grammar/grammar',
                 ],
             },
             {
                 type: 'category',
                 label: 'Words',
                 items: [
-                    'ourExperience/programming-words/programming-words',
+                    'ourExperience/english/programming-words/programming-words',
                 ],
             },
             {
                 type: 'category',
                 label: 'ABBR',
                 items: [
-                    'ourExperience/programming-abbr/programming-abbr',
+                    'ourExperience/english/programming-abbr/programming-abbr',
                 ],
             },
         ],
