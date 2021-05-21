@@ -47,7 +47,8 @@ module.exports = {
                 type: 'category',
                 label: 'Grammar',
                 items: [
-                    'ourExperience/english/grammar/grammar',
+                    'ourExperience/english/grammar/grammar1',
+                    'ourExperience/english/grammar/grammar2',
                 ],
             },
             {
