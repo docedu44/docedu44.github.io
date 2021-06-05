@@ -1,0 +1,209 @@
+---
+id: redux-toolkit-summary
+title: خلاصه ریداکس تولکیت
+author: mamad
+---
+
+اول از همه اینجا یه فایل درست میکنیم : `src/app/store.js`
+
+بعد برای اینکه یه استور خالی درست کنیم از کد های زیر استفاده می کنیم: (همچنین مستقیما به **redux devtools** هم وصل میشه)
+
+<div dir="ltr">
+
+```javascript
+    import {configureStore} from '@reduxjs/toolkit'
+
+    export default configureStore({
+        reducer: {},
+    })
+```
+
+</div>
+
+حالا فقط کافیه که توو مسیر `src/index.js` کل اپ مون رو داخل استور قرار بدیم تا هرجای اپ به استورمون دسترسی داشته باشیم:
+
+<div dir="ltr">
+
+```javascript
+    import React from 'react'
+    import ReactDOM from 'react-dom'
+    import './index.css'
+    import App from './App'
+    import store from './app/store'
+    import {Provider} from 'react-redux'
+
+    ReactDOM.render(
+        <Provider store={store}>
+            <App/>
+        </Provider>,
+        document.getElementById('root')
+    )
+```
+
+</div>
+
+حالا این فایل رو می سازیم : `src/features/counter/counterSlice.js` بعدش میاییم از `createSlice` استفاده می کنیم
+
+این فایل به یک اسم رشته ای برای نامگذاری، یک مقدار اولیه و یک یا چند تابع reducer برای تغییرات روی متغییرمان نیاز دارد
+
+( این روند به این صورت است که redux از اطلاعات ما کپی می گیرد و سپس تغییرات را روی کپی اعمال می کند )
+
+حال از کد های زیر برای پیکربندی استفاده می کنیم:
+
+<div dir="ltr">
+
+```javascript
+    import {createSlice} from '@reduxjs/toolkit'
+
+    export const counterSlice = createSlice({
+        name: 'counter',
+        initialState: {
+            value: 0,
+        },
+        reducers: {
+            increment: (state) => {
+                // Redux Toolkit allows us to write "mutating" logic in reducers. It
+                // doesn't actually mutate the state because it uses the Immer library,
+                // which detects changes to a "draft state" and produces a brand new
+                // immutable state based off those changes
+                state.value += 1
+            },
+            decrement: (state) => {
+                state.value -= 1
+            },
+            incrementByAmount: (state, action) => {
+                state.value += action.payload
+            },
+        },
+    })
+
+    // Action creators are generated for each case reducer function
+    export const {increment, decrement, incrementByAmount} = counterSlice.actions
+
+    export default counterSlice.reducer
+```
+
+</div>
+
+حالا برای اینکه این slice که ساختیم رو به `store/index.js` بدیم باید به صورت زیر عمل کنیم:
+
+<div dir="ltr">
+
+```javascript
+    import { configureStore } from '@reduxjs/toolkit'
+    import counterReducer from '../features/counter/counterSlice'
+
+    export default configureStore({
+    reducer: {
+    counter: counterReducer,
+},
+})
+```
+
+</div>
+
+حالا برای اینکه یه کامپوننت تست درست کنیم، توو `src/features/counter/Counter.js` یه فایل می سازیم و بعدش اونو توو `App.js` استفاده می کنیم:
+
+<div dir="ltr">
+
+```javascript
+    import React from 'react'
+    import { useSelector, useDispatch } from 'react-redux'
+    import { decrement, increment } from './counterSlice'
+
+    export function Counter() {
+    const count = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
+
+    return (
+    <div>
+    <div>
+    <button
+    aria-label="Increment value"
+    onClick={() => dispatch(increment())}
+    >
+    Increment
+    </button>
+    <span>{count}</span>
+    <button
+    aria-label="Decrement value"
+    onClick={() => dispatch(decrement())}
+    >
+    Decrement
+    </button>
+    </div>
+    </div>
+    )
+}
+```
+
+</div>
+
+حال اگر بخواهیم کدمان را به صورت async بنویسیم (مثلا برای لاگین و ... که نیاز است اول داده ها را داشته باشیم سپس بر اساس داده ها چیزی را رندر کنیم) باید به صورت زیر عمل کنیم:
+
+<div dir="ltr">
+
+```javascript
+    import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+
+    const initialState= {
+    value: 0,
+    status: "idle"
+}
+
+    // make a function like api
+    function fetchCount(amount = 1) {
+    return new Promise((resolve) =>
+    setTimeout(() => resolve({ data: amount }), 1000)
+    );
+}
+
+    // create function out of createSlice() and use createAsyncThunk() for async function
+    export const incrementAsync = createAsyncThunk(
+    "counter/fetchCount",
+    async (num)=> {
+    const response = await fetchCount(num);
+    return response.data
+}
+    )
+
+    export const counterSlice = createSlice({
+    name: "counter",
+    initialState,
+    reducers: {
+    increment: (state) => {
+    state.value += 1;
+},
+    decrement: (state) => {
+    state.value -= 1;
+},
+    incrementByAmount: (state, action) => {
+    state.value += action.payload
+}
+},
+
+    // use builder instead of switch case and use pending, fulfield and rejected
+    extraReducers:(builder) => {
+    builder
+    .addCase(incrementAsync.pending, (state) => {
+    state.status = "loading";
+    console.log(state.status);
+}).addCase(incrementAsync.fulfilled, (state, action)=> {
+    state.status = "idle";
+    console.log(state.status);
+    state.value += action.payload;
+}).addCase(incrementAsync.rejected, (state, err) => {
+    state.status = "idle";
+    console.log(err);
+})
+}
+});
+
+    export const {increment, decrement, incrementByAmount} = counterSlice.actions;
+
+    export default counterSlice.reducer;
+```
+
+</div>
+
+توابع extraReducer و createAsyncThunk فقط برای عملیات async استفاده می شود

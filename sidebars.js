@@ -22,6 +22,7 @@ module.exports = {
                 label: 'redux tool kit',
                 items: [
                     'ourExperience/redux-tool-kit/reduxtoolkit',
+                    'ourExperience/redux-tool-kit/redux-toolkit-summary',
                 ],
             },
             {
