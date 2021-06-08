@@ -207,3 +207,82 @@ author: mamad
 </div>
 
 توابع extraReducer و createAsyncThunk فقط برای عملیات async استفاده می شود
+
+هرگاه بخواهیم هنگام reject شدن کل داده های ارور را برای ما برگرداند، باید به صورت زیر عمل کنیم
+
+<div dir="ltr">
+
+```javascript
+    import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+
+    const initialState= {
+    value: 0,
+    status: "idle"
+}
+
+    // make a function like api
+    function fetchCount(amount = 1) {
+    return new Promise((resolve) =>
+    setTimeout(() => resolve({ data: amount }), 1000)
+    );
+}
+
+    // create function out of createSlice() and use createAsyncThunk() for async function
+    export const incrementAsync = createAsyncThunk(
+    "counter/fetchCount",
+    async (num, {rejectWithValue}) => {
+    try {
+        const response = await fetchCount(num);
+        return {
+            data: response.data,
+            status
+        }
+    } catch (e) {
+        //! return all errors data
+        return rejectWithValue({
+            data: e.response.data,
+            status: e.response.status
+        })
+    }
+    }
+    )
+
+    export const counterSlice = createSlice({
+    name: "counter",
+    initialState,
+    reducers: {
+    increment: (state) => {
+    state.value += 1;
+},
+    decrement: (state) => {
+    state.value -= 1;
+},
+    incrementByAmount: (state, action) => {
+    state.value += action.payload
+}
+},
+
+    // use builder instead of switch case and use pending, fulfield and rejected
+    extraReducers:(builder) => {
+    builder
+    .addCase(incrementAsync.pending, (state) => {
+    state.status = "loading";
+    console.log(state.status);
+}).addCase(incrementAsync.fulfilled, (state, action)=> {
+    state.status = "idle";
+    console.log(state.status);
+    state.value += action.payload;
+}).addCase(incrementAsync.rejected, (state, err) => {
+    state.status = "idle";
+    console.log(err);
+    console.log(err.payload.status);
+})
+}
+});
+
+    export const {increment, decrement, incrementByAmount} = counterSlice.actions;
+
+    export default counterSlice.reducer;
+```
+
+</div>
