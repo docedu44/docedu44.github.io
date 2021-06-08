@@ -50,6 +50,8 @@ module.exports = {
                 items: [
                     'ourExperience/english/grammar/grammar1',
                     'ourExperience/english/grammar/grammar2',
+                    'ourExperience/english/grammar/grammar3',
+                    'ourExperience/english/grammar/grammar4',
                 ],
             },
             {
