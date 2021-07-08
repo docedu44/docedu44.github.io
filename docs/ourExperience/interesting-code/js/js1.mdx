@@ -1,0 +1,17 @@
+---
+id: js1
+title: js1
+author: mamadfar
+---
+
+### تاریخ به صورت JSON
+
+تاریخ روز را به صورت JSON تبدیل می کند و فرمت آن را به صورت `YYYY/MM/DD --- 2020/03/22` تبدیل می کند
+
+<div dir="ltr">
+
+```javascript
+(new Date().toJSON().slice(0, 10).replace(/-/g, '/'))
+```
+
+</div>

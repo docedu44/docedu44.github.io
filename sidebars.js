@@ -76,6 +76,22 @@ module.exports = {
                 ],
             },
         ],
+        "کد های باحال": [
+            {
+                type: 'category',
+                label: 'html-css',
+                items: [
+                    'ourExperience/interesting-code/html-css/htmlCss1',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'js',
+                items: [
+                    'ourExperience/interesting-code/js/js1',
+                ],
+            },
+        ],
         "داکیومنت های شرکت": [
             "hami/test",
         ],

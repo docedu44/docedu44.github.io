@@ -1,0 +1,53 @@
+---
+id: htmlCss1
+title: html css 1
+author: mamadfar
+---
+
+### استایل قشنگ border
+
+<div dir="ltr">
+
+```html
+// CSS
+
+div.box {
+  padding: 3px 6px;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(#000, #000) bottom/0% 2px no-repeat;
+  transition:1s all;
+}
+
+div.box:hover {
+  background-size: 100% 2px;
+}
+
+
+// HTML
+
+<div class="box">
+  <h1>Lorem Ipsum</h1>
+</div>
+
+```
+
+</div>
+
+### فیلتر در html
+
+یک حالت جستجو بین موارد ساخته شده را میدهد یعنی هنگام تایپ ، موارد را فیلتر می کند
+
+<div dir="ltr">
+
+```html
+<input className="form-control" type="text" list="fruits"/>
+<datalist className="form-control" id="fruits">
+    <option value="apple"></option>
+    <option value="banana"></option>
+    <option value="orange"></option>
+</datalist>
+```
+
+</div>
+
