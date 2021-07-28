@@ -1,0 +1,21 @@
+---
+id: good-stuff1
+title: نکات react - بخش 1
+---
+
+### ()React.memo
+
+توسط کد زیر می توان از **`Re-render`** چند باره کامپوننت ها جلوگیری کرد:
+
+<div dir="ltr">
+
+```js
+    import React from "react"
+
+    const Greeting = React.memo(props => {
+        console.log("Greeting Comp render");
+        return <h1>Hi {props.name}!</h1>;
+    });
+```
+
+</div>

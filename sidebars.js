@@ -6,7 +6,7 @@ module.exports = {
                 type: 'category',
                 label: 'Docker',
                 items: [
-                    'ourExperience/docker/docker-mf',
+                    'ourExperience/docker/docker-react',
                 ],
             },
             {
@@ -40,6 +40,13 @@ module.exports = {
                 label: 'nest.js',
                 items: [
                     'ourExperience/nestjs/nestjs-starter',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'react.js',
+                items: [
+                    'ourExperience/react/good-stuff1',
                 ],
             },
         ],
