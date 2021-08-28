@@ -102,7 +102,7 @@ author: mamad
 
 </div>
 
-حالا برای اینکه یه کامپوننت تست درست کنیم، توو `src/features/counter/Counter.js` یه فایل می سازیم و بعدش اونو توو `App.js` استفاده می کنیم:
+حالا برای اینکه یه کامپوننت تست درست کنیم، توو `src/features/counter/Counter.js` یه فایل می سازیم و بعدش اونو توو `App.js` استفاده می کنیم: ( حتما توابع درون dispatch ها با () باشد. )
 
 <div dir="ltr">
 
@@ -116,23 +116,23 @@ author: mamad
     const dispatch = useDispatch()
 
     return (
-    <div>
-    <div>
-    <button
-    aria-label="Increment value"
-    onClick={() => dispatch(increment())}
-    >
-    Increment
-    </button>
-    <span>{count}</span>
-    <button
-    aria-label="Decrement value"
-    onClick={() => dispatch(decrement())}
-    >
-    Decrement
-    </button>
-    </div>
-    </div>
+        <div>
+            <div>
+                <button
+                aria-label="Increment value"
+                onClick={() => dispatch(increment())}
+                >
+                    Increment
+                </button>
+                <span>{count}</span>
+                <button
+                aria-label="Decrement value"
+                onClick={() => dispatch(decrement())}
+                >
+                    Decrement
+                </button>
+            </div>
+        </div>
     )
 }
 ```
@@ -147,56 +147,56 @@ author: mamad
     import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
     const initialState= {
-    value: 0,
-    status: "idle"
-}
+        value: 0,
+        status: "idle"
+    }
 
     // make a function like api
     function fetchCount(amount = 1) {
-    return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 1000)
-    );
-}
+        return new Promise((resolve) =>
+            setTimeout(() => resolve({ data: amount }), 1000)
+        );
+    }
 
     // create function out of createSlice() and use createAsyncThunk() for async function
     export const incrementAsync = createAsyncThunk(
-    "counter/fetchCount",
-    async (num)=> {
-    const response = await fetchCount(num);
-    return response.data
-}
+        "counter/fetchCount",
+        async (num)=> {
+            const response = await fetchCount(num);
+            return response.data
+        }
     )
 
     export const counterSlice = createSlice({
-    name: "counter",
-    initialState,
-    reducers: {
-    increment: (state) => {
-    state.value += 1;
-},
-    decrement: (state) => {
-    state.value -= 1;
-},
-    incrementByAmount: (state, action) => {
-    state.value += action.payload
-}
-},
+        name: "counter",
+        initialState,
+        reducers: {
+            increment: (state) => {
+                state.value += 1;
+            },
+            decrement: (state) => {
+                state.value -= 1;
+            },
+            incrementByAmount: (state, action) => {
+                state.value += action.payload
+            }
+        },
 
     // use builder instead of switch case and use pending, fulfield and rejected
     extraReducers:(builder) => {
-    builder
-    .addCase(incrementAsync.pending, (state) => {
-    state.status = "loading";
-    console.log(state.status);
-}).addCase(incrementAsync.fulfilled, (state, action)=> {
-    state.status = "idle";
-    console.log(state.status);
-    state.value += action.payload;
-}).addCase(incrementAsync.rejected, (state, err) => {
-    state.status = "idle";
-    console.log(err);
-})
-}
+        builder
+            .addCase(incrementAsync.pending, (state) => {
+                state.status = "loading";
+                console.log(state.status);
+            }).addCase(incrementAsync.fulfilled, (state, action)=> {
+                state.status = "idle";
+                console.log(state.status);
+                state.value += action.payload;
+            }).addCase(incrementAsync.rejected, (state, err) => {
+                state.status = "idle";
+                console.log(err);
+            })
+    }
 });
 
     export const {increment, decrement, incrementByAmount} = counterSlice.actions;
@@ -216,69 +216,69 @@ author: mamad
     import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
     const initialState= {
-    value: 0,
-    status: "idle"
-}
+        value: 0,
+        status: "idle"
+    }
 
     // make a function like api
     function fetchCount(amount = 1) {
-    return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 1000)
-    );
-}
+        return new Promise((resolve) =>
+            setTimeout(() => resolve({ data: amount }), 1000)
+        );
+    }
 
     // create function out of createSlice() and use createAsyncThunk() for async function
     export const incrementAsync = createAsyncThunk(
-    "counter/fetchCount",
-    async (num, {rejectWithValue}) => {
-    try {
-        const response = await fetchCount(num);
-        return {
-            data: response.data,
-            status
+        "counter/fetchCount",
+        async (num, {rejectWithValue}) => {
+            try {
+                const response = await fetchCount(num);
+            return {
+                data: response.data,
+                status
+            }
+        } catch (e) {
+            //! return all errors data
+            return rejectWithValue({
+                data: e.response.data,
+                status: e.response.status
+                })
+            }
         }
-    } catch (e) {
-        //! return all errors data
-        return rejectWithValue({
-            data: e.response.data,
-            status: e.response.status
-        })
-    }
-    }
     )
 
     export const counterSlice = createSlice({
-    name: "counter",
-    initialState,
-    reducers: {
-    increment: (state) => {
-    state.value += 1;
-},
-    decrement: (state) => {
-    state.value -= 1;
-},
-    incrementByAmount: (state, action) => {
-    state.value += action.payload
-}
+        name: "counter",
+        initialState,
+        reducers: {
+            increment: (state) => {
+            state.value += 1;
+    },
+        decrement: (state) => {
+            state.value -= 1;
+    },
+        incrementByAmount: (state, action) => {
+            state.value += action.payload
+    }
 },
 
     // use builder instead of switch case and use pending, fulfield and rejected
     extraReducers:(builder) => {
-    builder
-    .addCase(incrementAsync.pending, (state) => {
-    state.status = "loading";
-    console.log(state.status);
-}).addCase(incrementAsync.fulfilled, (state, action)=> {
-    state.status = "idle";
-    console.log(state.status);
-    state.value += action.payload;
-}).addCase(incrementAsync.rejected, (state, err) => {
-    state.status = "idle";
-    console.log(err);
-    console.log(err.payload.status);
-})
-}
-});
+        builder
+            .addCase(incrementAsync.pending, (state) => {
+                state.status = "loading";
+                console.log(state.status);
+            }).addCase(incrementAsync.fulfilled, (state, action)=> {
+                state.status = "idle";
+                console.log(state.status);
+                state.value += action.payload;
+            }).addCase(incrementAsync.rejected, (state, err) => {
+                state.status = "idle";
+                console.log(err);
+                console.log(err.payload.status);
+            })
+        }
+    });
 
     export const {increment, decrement, incrementByAmount} = counterSlice.actions;
 

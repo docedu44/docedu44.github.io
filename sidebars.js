@@ -11,18 +11,17 @@ module.exports = {
             },
             {
                 type: 'category',
-                label: 'PWA',
+                label: 'Nginx',
                 items: [
-                    'ourExperience/PWA/pwa',
-                    'ourExperience/PWA/pwa_react',
+                    'ourExperience/nginx/nginx-react',
                 ],
             },
             {
                 type: 'category',
-                label: 'redux tool kit',
+                label: 'PWA',
                 items: [
-                    'ourExperience/redux-tool-kit/reduxtoolkit',
-                    'ourExperience/redux-tool-kit/redux-toolkit-summary',
+                    'ourExperience/PWA/pwa',
+                    'ourExperience/PWA/pwa_react',
                 ],
             },
             {
@@ -47,6 +46,15 @@ module.exports = {
                 label: 'react.js',
                 items: [
                     'ourExperience/react/good-stuff1',
+                    'ourExperience/react/redux-tool-kit/reduxtoolkit',
+                    'ourExperience/react/redux-tool-kit/redux-toolkit-summary',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Hints',
+                items: [
+                    'ourExperience/hints/hint-1',
                 ],
             },
         ],
@@ -80,6 +88,13 @@ module.exports = {
                 label: 'ABBR',
                 items: [
                     'ourExperience/english/programming-abbr/programming-abbr',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Hints',
+                items: [
+                    'ourExperience/english/other/hints',
                 ],
             },
         ],
