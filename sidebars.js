@@ -57,6 +57,13 @@ module.exports = {
                     'ourExperience/hints/hint-1',
                 ],
             },
+            {
+                type: 'category',
+                label: 'vue.js',
+                items: [
+                    'ourExperience/vue/vue-tips1',
+                ],
+            },
         ],
         "زبان": [
             {
