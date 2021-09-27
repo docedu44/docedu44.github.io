@@ -6,7 +6,14 @@ module.exports = {
                 type: 'category',
                 label: 'Docker',
                 items: [
-                    'ourExperience/docker/docker-mf',
+                    'ourExperience/docker/docker-react',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Nginx',
+                items: [
+                    'ourExperience/nginx/nginx-react',
                 ],
             },
             {
@@ -15,14 +22,6 @@ module.exports = {
                 items: [
                     'ourExperience/PWA/pwa',
                     'ourExperience/PWA/pwa_react',
-                ],
-            },
-            {
-                type: 'category',
-                label: 'redux tool kit',
-                items: [
-                    'ourExperience/redux-tool-kit/reduxtoolkit',
-                    'ourExperience/redux-tool-kit/redux-toolkit-summary',
                 ],
             },
             {
@@ -40,6 +39,29 @@ module.exports = {
                 label: 'nest.js',
                 items: [
                     'ourExperience/nestjs/nestjs-starter',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'react.js',
+                items: [
+                    'ourExperience/react/good-stuff1',
+                    'ourExperience/react/redux-tool-kit/reduxtoolkit',
+                    'ourExperience/react/redux-tool-kit/redux-toolkit-summary',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Hints',
+                items: [
+                    'ourExperience/hints/hint-1',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'vue.js',
+                items: [
+                    'ourExperience/vue/vue-tips1',
                 ],
             },
         ],
@@ -90,6 +112,13 @@ module.exports = {
                 label: 'ABBR',
                 items: [
                     'ourExperience/english/programming-abbr/programming-abbr',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Hints',
+                items: [
+                    'ourExperience/english/other/hints',
                 ],
             },
         ],

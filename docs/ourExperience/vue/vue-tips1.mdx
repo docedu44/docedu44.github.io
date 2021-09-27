@@ -1,0 +1,115 @@
+---
+id: vue-tips1
+title: نکات vue - بخش 1
+---
+
+### update value in child component
+
+هرگاه بخواهیم یک مقداری را از کامپوننت والد به فرزند بدهیم و در کامپوننت فرزند بخواهیم آن را آپدیت کنیم و کامپوننت والد از این تغییرات مطلع شود، باید به صورت زیر عمل کنیم:
+
+<div dir="ltr">
+
+```js
+<template>
+    <SingleTodo
+    :addTodo="addTodo"
+    :title="title"
+    @update:title="title = $event"
+    :date="date"
+    @update:date="date = $event"/>
+</template>
+
+<script>
+    import { ref } from "@vue/reactivity";
+    import { onMounted } from "@vue/runtime-core";
+    import axios from "axios";
+    import SingleTodo from "@/components/SingleTodo.vue";
+    export default {
+        name: "Todos",
+        components: {
+            SingleTodo,
+        },
+        setup() {
+            const todos = ref([]);
+            const title = ref("");
+            const date = ref("");
+            const status = ref("active");
+
+            onMounted(async () => {
+            //* get data
+            try {
+                const { data } = await axios.get("http://localhost:3000/todos");
+            todos.value = data;
+            } catch (e) {
+                console.log(e);
+            }
+        });
+
+        //* add new todo
+        const addTodo = async () => {
+        try {
+        const { data } = await axios.post("http://localhost:3000/todos", {
+        id: Math.random() * 99999999,
+        title: title.value,
+        date: date.value,
+        status: status.value,
+    });
+        todos.value = [...todos.value, data];
+        title.value = "";
+        date.value = "";
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+        return {
+            todos,
+            addTodo,
+            title,
+            date,
+        };
+    },
+    };
+</script>
+
+```
+
+</div>
+
+حال در کامپوننت فرزند به صورت زیر عمل می کنیم:
+
+<div dir="ltr">
+
+```js
+
+<template>
+    <form @submit.prevent="addTodo">
+        <div class="new-todo">
+            <button>
+                <span class="circle"></span>
+            </button>
+            <input type="text" placeholder="Create a new todo..."
+            :value="title"
+            @input="$emit('update:title', $event.target.value)" />
+
+            <input type="date" class="ml-auto"
+            :value="date"
+            @input="$emit('update:date', $event.target.value)" />
+        </div>
+    </form>
+</template>
+
+<script>
+    export default {
+        name: "SingleTodo",
+        props: ["addTodo", "title", "date"],
+        emits: ["update:title", "update:date"],
+        setup() {}
+    };
+</script>
+
+
+```
+
+</div>
+
