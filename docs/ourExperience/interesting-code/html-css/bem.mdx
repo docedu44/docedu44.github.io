@@ -1,0 +1,215 @@
+---
+id: bem
+title: Bem
+author: mamadfar
+---
+
+### BEM
+
+در واقع `BEM` از 3 واژه `Block` و `Element` و `Modifier` تشکیل شده است.
+
+1. `Block` : یعنی باید هدف کلاس تعریف شده را توصیف کند، مثل `menu.`
+
+<div dir="ltr">
+
+```html
+    <!-- Correct. The `error` block is semantically meaningful -->
+    <div class="error"></div>
+
+    <!-- Incorrect. It describes the appearance -->
+    <div class="red-text"></div>
+```
+
+</div>
+
+یک Block نباید محیط اطرافش را تحت تأثیر قرار دهد. یعنی نباید margin یا position به خصوصی داشته باشد.
+
+همچنین وقتی که از روش BEM استفاده می‌کنید، نباید از تگ‌ها و ID عناصر در CSS استفاده کنید، بلکه فقط استفاده از کلاس مجاز است.
+
+این موارد، استقلال مورد نیاز Block را برای استفاده‌ی مجدد یا جابجایی آن به هر قسمتی از پروژه، تضمین می‌کند.
+
+🎉 بلاک ها دارای 3 ویژگی 1. تورفتگی ( Nesting ) و 2. جاگیری دلخواه ( Arbitrary placement ) و 3. استفاده‌ی مجدد (Re-use) می باشد که
+اولی یعنی هر بلاک از چند بخش تشکیل شود و هر بخش استایل خاص خودش را داشته باشد:
+
+<div dir="ltr">
+
+```html
+    <!-- `header` block -->
+    <header class="header">
+        <!-- Nested `logo` block -->
+        <div class="logo"></div>
+
+        <!-- Nested `search-form` block -->
+        <form class="search-form"></form>
+    </header>
+```
+
+</div>
+
+و دومی نیز یعنی میتوان این بلاک ها را جابه جا کرد
+
+و سومی هم یعنی قابلیت استفاده دوباره را دارند.
+
+2. `Element` : قسمتی از `Block` می باشد که مستقل قابل استفاده نیست.
+
+برای مثال آیتم‌های یک منو خارج از فضای اصلی آن استفاده نمی‌شوند بنابراین هر آیتم یک عنصر است.
+
+`element` نیز مانند `block` باید هدف را توصیف کند، نه شکل ظاهری را و ساختار نام کامل یک عنصر به صورت `block-name__element-name` می باشد.
+
+<div dir="ltr">
+
+```html
+    <!-- `search-form` block -->
+    <form class="search-form">
+        <!-- `input` element in the `search-form` block -->
+        <input class="search-form__input">
+
+            <!-- `button` element in the `search-form` block -->
+            <button class="search-form__button">Search</button>
+    </form>
+```
+
+</div>
+
+🎉 نام عنصر توسط 2 عدد `underscore(__)` مشخص می شود.
+
+همچنین `element` نیز دارای ویژگی هایی می باشد که اول تورفتگی است و می توان عناصر را به صورت تورتگی استفاده کرد:
+
+<div dir="ltr">
+
+```html
+    <!--
+        Correct. The structure of the full element name follows the pattern:
+        `block-name__element-name`
+    -->
+    <form class="search-form">
+        <div class="search-form__content">
+
+            <input class="search-form__input">
+
+                <button class="search-form__button">Search</button>
+
+        </div>
+    </form>
+
+
+    <!--
+        Incorrect. The structure of the full element name doesn't follow the pattern:
+        `block-name__element-name`
+    -->
+    <form class="search-form">
+        <div class="search-form__content">
+
+            <!-- Recommended: `search-form__input` or `search-form__content-input` -->
+            <input class="search-form__content__input">
+
+                <!-- Recommended: `search-form__button` or `search-form__content-button` -->
+                <button class="search-form__content__button">Search</button>
+
+        </div>
+    </form>
+```
+
+</div>
+
+که حالت دوم اشتباه می باشد.
+
+دوم عضویت می باشد و یعنی یک عنصر باید همیشه عضو یک بلاک باشد و مجزا از بلاک نباشد.
+
+<div dir="ltr">
+
+```html
+    <!-- Correct. Elements are located inside the `search-form` block -->
+
+    <!-- `search-form` block -->
+    <form class="search-form">
+
+        <!-- `input` element in the `search-form` block -->
+        <input class="search-form__input">
+
+            <!-- `button` element in the `search-form` block -->
+            <button class="search-form__button">Search</button>
+
+    </form>
+
+
+    <!--
+        Incorrect. Elements are located outside of the context of
+        the `search-form` block
+    -->
+
+    <!-- `search-form` block -->
+    <form class="search-form">
+    </form>
+
+    <!-- `input` element in the `search-form` block -->
+    <input class="search-form__input">
+
+        <!-- `button` element in the `search-form` block-->
+        <button class="search-form__button">Search</button>
+```
+
+</div>
+
+سوم اختیاری بودن یک عنصر است که یعنی یک بلاک می تواند عنصری نداشته باشد.
+
+3. `Modifier` : در واقع ماهیتیست که ظاهر، حالت و رفتار یک بلاک یا عنصر را مشخص می کند.
+
+نام `modifier` می‌تواند بیانگر هر یک از موارد زیر باشد:
+
+1. شکل ظاهری آن، مثلا این که چه اندازه‌ای دارد (size_s)
+2. حالت آن، مثلا این که چه تفاوتی دارد (disabled یا focused)
+3. رفتار آن، مثلا این که چه واکنشی نشان می‌دهد (directions_left-top)
+
+نام پیراینده توسط یک underscore ( _ ) از بلاک یا عنصر جدا می‌شود.
+
+در واقع ما 2 حالت استفاده از `modifier` داریم که
+اولی 1. نوع `Boolean` می باشد
+
+<div dir="ltr">
+
+```html
+    <!-- The `search-form` block has the `focused` Boolean modifier -->
+    <form class="search-form search-form_focused">
+        <input class="search-form__input">
+
+            <!-- The `button` element has the `disabled` Boolean modifier -->
+            <button class="search-form__button search-form__button_disabled">Search</button>
+    </form>
+```
+
+</div>
+
+و دومی 2. نوع `key-value` می باشد:
+
+<div dir="ltr">
+
+```html
+    <!-- The `search-form` block has the `theme` modifier with the value `islands` -->
+    <form class="search-form search-form_theme_islands">
+        <input class="search-form__input">
+
+            <!-- The `button` element has the `size` modifier with the value `m` -->
+            <button class="search-form__button search-form__button_size_m">Search</button>
+    </form>
+
+
+
+    <!-- You can't use two identical modifiers with different values simultaneously -->
+    <form class="search-form
+             search-form_theme_islands
+             search-form_theme_lite">
+
+        <input class="search-form__input">
+
+            <button class="search-form__button
+                   search-form__button_size_s
+                   search-form__button_size_m">
+                Search
+            </button>
+    </form>
+```
+
+</div>
+
+🎉 یک `modifier` هیچوقت به تنهایی قابل استفاده نیست
