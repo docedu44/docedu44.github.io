@@ -75,12 +75,29 @@ module.exports = {
         "زبان": [
             {
                 type: 'category',
+                label: 'IELTS',
+                items: [
+                    'ourExperience/english/IELTS/listening',
+                    'ourExperience/english/IELTS/reading',
+                    'ourExperience/english/IELTS/speaking',
+                    'ourExperience/english/IELTS/writing',
+                    'ourExperience/english/IELTS/hints',
+                ],
+            }, {
+                type: 'category',
                 label: 'Grammar',
                 items: [
                     'ourExperience/english/grammar/grammar1',
                     'ourExperience/english/grammar/grammar2',
                     'ourExperience/english/grammar/grammar3',
                     'ourExperience/english/grammar/grammar4',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Tips',
+                items: [
+                    'ourExperience/english/cues/cues1',
                 ],
             },
             {
