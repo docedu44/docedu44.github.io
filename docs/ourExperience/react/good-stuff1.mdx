@@ -39,9 +39,9 @@ title: نکات react - بخش 1
 
 <div dir="ltr">
 
-    ```JSX
+```JSX
     console.log(process.env.REACT_APP_SECRET_NAME)
-    ```
+```
 
 </div>
 
@@ -57,3 +57,54 @@ title: نکات react - بخش 1
 
 🎉 هرگاه بخواهیم ارور ها به **Interceptors** خود **Axios** ارسال شود، حتما باید ارور را در **()catch** درخواستمان برگردانیم ( **return** ).
 
+🎉 در `React` ما 4 `property` داریم ک مستقیما به خود کامپوننت متصل می شوند و هر کدام کاریی را انجام می دهند:
+
+1. `propTypes`
+2. `displayName`
+3. `defaultProps`
+4. `contextTypes`
+
+<div dir="ltr">
+
+``` jsx
+    interface ChildProps {
+    color: string;
+}
+
+    export const Child = ({color}: ChildProps) => {
+    return <h1>{color}</h1>
+}
+
+    Child.defaultProps = {
+    color: "blue"
+}
+
+    OR
+
+    export const ChildAsFC : React.FC<ChildProps> = ({color}) => {
+    return <div>{color}</div>
+}
+
+    ChildAsFC.defaultProps = {
+        color: "green"
+    }
+```
+
+</div>
+
+🎉 برای اینکه یک خط کد را در شرایطی ک مقدار موجود `falsy` می باشد، نخواهیم اجرا کنیم، از `type guard` استفاده می کنیم:
+
+<div dir="ltr">
+
+``` jsx
+
+    useEffect(() => {
+        if(!inputRef.current) {
+            return;
+        }
+        inputRef.current.focus()
+    }, [])
+
+```
+
+</div>

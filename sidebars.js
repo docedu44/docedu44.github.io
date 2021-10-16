@@ -48,6 +48,7 @@ module.exports = {
                     'ourExperience/react/good-stuff1',
                     'ourExperience/react/redux-tool-kit/reduxtoolkit',
                     'ourExperience/react/redux-tool-kit/redux-toolkit-summary',
+                    'ourExperience/react/tsx/ts-in-react',
                 ],
             },
             {
@@ -62,6 +63,14 @@ module.exports = {
                 label: 'vue.js',
                 items: [
                     'ourExperience/vue/vue-tips1',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'react-native',
+                items: [
+                    'ourExperience/react-native/react-native1',
+                    'ourExperience/react-native/react-native-packages',
                 ],
             },
         ],

@@ -1,0 +1,66 @@
+---
+id: react-native1
+title: بخش 1
+---
+
+### تگ ها
+
+`View`:
+معادل همان `div` می باشد که برای مشخص کردن هر بخش از آن استفاده میکنیم.
+
+`Text`:
+معادل همان `p` می باشد که برای قرار دادن متن هایمان از آن استفاده می کنیم.
+
+`TouchableOpacity`
+ در واقع توسط این تگ می توان المان هایی ماننده `Image` و `Text` را `touchable` کنیم و از رویداد هایی ماننده `onPress` برای آن ها استفاده کنیم.
+
+### Tips
+
+🎉 در `React Native` در واقع `flex` به صورت پیش فرض تمام عرض و ارتفاع باقی مانده را به خود اختصاص می دهد و می توان درون آن دوباره از `flex` برای فرزندان نیز استفاده کرد:
+
+
+<div dir="ltr">
+
+```jsx
+    return (
+    <View style={{flex :1 }}>
+
+        <View style={{flex :1, backgroundColor: '#FF5722'}} />
+
+        <View style={{flex :2, backgroundColor: '#673AB7'}} />
+
+        <View style={{flex :3, backgroundColor: '#FFEB3B'}} />
+
+    </View>
+    );
+```
+
+</div>
+
+
+🎉 برای اینکه یک تابع را در یک `useState` استفاده کنیم و چون مرسوم است که `useState` در ابتدای بدنه `function` تعریف شود، باید تابع مورد نظر را در خارج از بدنه تابع اصلی تعریف کنیم:
+
+<div dir="ltr">
+
+```jsx
+
+    import React, { useState } from "react";
+    import {Text, View } from "react-native";
+
+    const minutesToMillis = (min) => min * 1000 * 60;
+
+    export const Countdown = ({ minutes = 20, isPaused }) => {
+
+    const [millies, setMillies] = useState(minutesToMillis(minutes))
+
+    return (
+        <View>
+            <Text>{millies}</Text>
+        </View>
+    );
+};
+
+ ```
+
+</div>
+
