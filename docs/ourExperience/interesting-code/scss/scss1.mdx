@@ -1,0 +1,23 @@
+---
+id: scss1
+title: scss 1
+author: mamadfar
+---
+
+### Minify
+
+برای اینکه کد های `scss` را هنگام خروجی به صورت سی اس اس، `minify` هم کنیم، باید در `package.json` به صورت زیر عمل کنیم:
+
+<div dir="ltr">
+
+```json
+
+"scripts": {
+    "watch": "sass --watch assets/scss/styles.scss:assets/css/styles.css --style compressed"
+},
+
+```
+
+</div>
+
+

@@ -53,6 +53,13 @@ module.exports = {
             },
             {
                 type: 'category',
+                label: 'next.js',
+                items: [
+                    'ourExperience/nextjs/next-hints1',
+                ],
+            },
+            {
+                type: 'category',
                 label: 'Hints',
                 items: [
                     'ourExperience/hints/hint-1',
@@ -137,6 +144,14 @@ module.exports = {
                 label: 'html-css',
                 items: [
                     'ourExperience/interesting-code/html-css/htmlCss1',
+                    'ourExperience/interesting-code/html-css/bem',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'scss',
+                items: [
+                    'ourExperience/interesting-code/scss/scss1',
                 ],
             },
             {
