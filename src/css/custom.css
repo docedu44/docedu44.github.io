@@ -15,8 +15,13 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+  --doc-sidebar-width: 350px !important;
   direction: rtl;
+}
 
+/* change direction of all of the div tag which has class with 'CodeBlock-' at the end */
+:root div[class$="CodeBlock-"] {
+  direction: ltr;
 }
 
 .docusaurus-highlight-code-line {
@@ -25,3 +30,7 @@
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+/*.mdxCodeBlock_node_modules-@docusaurus-theme-classic-lib-next-theme-MDXComponents- {*/
+/*  direction: ltr !important;*/
+/*}*/

@@ -1,0 +1,42 @@
+---
+id: reducers
+title: reducers
+---
+
+🎉 بهتر است همیشه قبل از اینکه بخواهیم از `store` استفاده کنیم، ابتدا یک `flow` از آن را رسم کنیم تا مشخص کنیم ک چ چیز هایی لازم داریم برای ذخیره سازی
+
+در واقع `reducer` ها برای نگه داری `state` ها می باشند ک می توان مقادیر را بر اساس یک سری اتفاقات ( `action` ) درون آن ها ریخت و در کامپوننت هایمان از آن ها استفاده کنیم
+
+همچنین می توان از `ts` نیز در `reducer` ها نیز استفاده کرد:
+
+
+
+```ts
+    interface RepositoriesState {
+        loading: boolean,
+        error: string | null,
+        data: string[]
+    }
+    const initialState = {
+        loading: false,
+        error: null,
+        data: []
+    }
+
+    const repositoriesReducer = (state: RepositoriesState = initialState, action: any) => {
+        switch (action.type) {
+            case "search_repositories":
+                return {loading: true, error: null, data: []}
+            case "search_repositories_success":
+                return {loading: false, error: null, data: action.payload}
+            case "search_repositories_error":
+                return {loading: false, error: action.payload, data: []}
+            default:
+                return state;
+    }
+}
+
+    export default repositoriesReducer;
+```
+
+

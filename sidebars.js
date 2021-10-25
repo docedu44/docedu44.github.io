@@ -49,6 +49,9 @@ module.exports = {
                     'ourExperience/react/redux-tool-kit/reduxtoolkit',
                     'ourExperience/react/redux-tool-kit/redux-toolkit-summary',
                     'ourExperience/react/tsx/ts-in-react',
+                    'ourExperience/react/tsx/dynamic-generate-route',
+                    'ourExperience/react/redux/reducers',
+                    'ourExperience/react/redux/ts-in-redux',
                 ],
             },
             {
@@ -56,6 +59,13 @@ module.exports = {
                 label: 'next.js',
                 items: [
                     'ourExperience/nextjs/next-hints1',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'Dependencies',
+                items: [
+                    'ourExperience/dependencies/auth0',
                 ],
             },
             {
@@ -161,9 +171,6 @@ module.exports = {
                     'ourExperience/interesting-code/js/js1',
                 ],
             },
-        ],
-        "داکیومنت های شرکت": [
-            "hami/test",
         ],
         Docusaurus: [
             'docusaurus/doc1',

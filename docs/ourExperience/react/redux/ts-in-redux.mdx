@@ -1,0 +1,52 @@
+---
+id: ts-in-redux
+title: TS in Redux
+---
+
+### Tips
+
+1. همیشه بهتر است برای همه ی `reducer` ها یک استیت `loading` ک `boolean` است و یک `error` ک یک `string` است قرار دهیم.
+
+2. همیشه برای `type` ها بهتر است ک یک `enum` تعریف کنیم و آن را در یک فایل دیگر قرار دهیم تا در `reducer` ها و `action` ها از آن استفاده کنیم
+
+3. برای `interface` ها نیز بهتر است یک فایل جدا قرار دهیم برای `reducer` ها ک امکان دارد ک چند مدل داده داشته باشیم، از چند `interface` استفاده می کنیم و در انتها آن ها را یک `type` می کنیم و از آن در `reducer` ها و `action` ها استفاده می کنیم.
+
+### dispatch in action
+
+میتوان در `action` ها هنگام استفاده از `dispatch` از تایپ مخصوص خودش استفاده کنیم به جای `any` و اگر بخواهیم از `interface` ها خودمان برای `dispatch` استفاده کنیم، باید آن را به صورت `generic` به آن بدهیم:
+
+```tsx
+import axios from "axios";
+import {RepositoriesActions} from "../actions/repositoriesActions";
+import {RepositoriesActionType} from "../action-types/repositoriesActionTypes";
+import {Dispatch} from "redux";
+
+export const searchRepositories = (term: string) => {
+    return async (dispatch: Dispatch<RepositoriesActions>) => {
+        dispatch({
+            type: RepositoriesActionType.SEARCH_REPOSITORIES
+        });
+
+        try {
+            const {data }: any = await axios.get(`https://registry.npmjs.org/-/v1/search?text=${term}`);
+            const names = data.objects.map((result: any) => {
+                return result.package.name
+            });
+
+            dispatch({
+                type: RepositoriesActionType.SEARCH_REPOSITORIES_SUCCESS,
+                payload: names
+            })
+        } catch (e: any) {
+            dispatch({
+                type: RepositoriesActionType.SEARCH_REPOSITORIES_ERROR,
+                payload: e.message
+            })
+        }
+    }
+}
+```
+
+
+
+

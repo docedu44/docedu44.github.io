@@ -1,0 +1,113 @@
+---
+id: dynamic-generate-route
+title: Generate Route
+---
+
+برای اینکه `route` هایمان را از روی یک آرایه بسازیم و همزمان چک کنیم ک آیا این روت بدون لاگین قابل دسترس است یا نه، می توانیم به صورت زیر عمل کنیم:
+
+```tsx
+//src/router/index.tsx
+import React, {useState} from "react";
+import {index} from "./routes";
+import {Redirect, Route, Switch} from "react-router-dom";
+
+interface IComponent {
+    Component: React.FC,
+    path: string,
+    auth?: any,
+    exact?: boolean
+}
+
+const GuardRoute: React.FC<IComponent> = ({Component, path, auth, exact}) => {
+    const [isLoggedIn] = useState<boolean>(true);
+    return (
+        <Route path={path} exact={exact} render={props => isLoggedIn ? <Component/> : <Redirect to={"/login"}/>}/>
+    )
+}
+
+export const ResolveRoutes: React.FC = () => {
+    return (
+            <Switch>
+                {index.map(r =>
+                    r.authRequired ?
+                    <GuardRoute key={r.path} exact={r.exact} path={r.path} Component={r.component}/>
+                    :
+                    <Route key={r.path} path={r.path} exact={true} component={r.component}/>)}
+            </Switch>
+    )
+}
+```
+
+در مرحله اول بر اساس مقدار `authRequired` تصمیم گرفته می شود ک آیا این مسیر به گارد احتیاج دارد یا نه و اگر نیاز نباشد، اجازه ورود داده می شود، در غیر اینصورت
+
+در مرحله دوم توسط `isLoggedIn` چک می شود که آیا لاگین است یا نه که در واقع بر اساس `token` داشتن یا نداشتن کاربر متغییر می باشد.
+
+حال اگر این مسیر در خواستی کاربر جزو مسیر های دارای `guard` باشد، بعد از چک لاگین بودن، اگر لاگین نباشد، آن را به یک مسیر دیگر منتقل می کند.
+
+```ts
+//src/router/routes/index.ts
+import Home from "../../pages/Home";
+import DataNodes from "../../pages/DataNodes";
+
+export const index = [
+    {
+        path: "/",
+        component: Home,
+        authRequired: true,
+        exact: true
+    },
+    {
+        path: "/data-nodes",
+        component: DataNodes,
+        authRequired: true,
+    },
+]
+```
+حال برای نمایش این مسیر ها باید از یک فایل دیگر استفاده کنیم و آن را در منوی خودمان نمایش دهیم:
+
+```tsx
+//src/navigation/index.tsx
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import {ListAlt} from "@mui/icons-material";
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default [
+    {
+        path: "/",
+        name: "Home",
+        title: "home",
+        icon: <DashboardIcon/>
+    },
+    {
+        path: "/data-nodes",
+        name: "Data Nodes",
+        title: "data nodes",
+        icon: <ListAlt/>
+    }
+]
+```
+این فایل `tsx` می باشد اما قبلی، `ts` بود، این پسوند ها بسیار مهم هستند، زیرا در دومی ما باید حتما کامپوننت برگردانیم.
+
+```tsx
+import {Link} from "react-router-dom"
+import {ListItem, ListItemIcon, ListItemText} from '@mui/material';
+import routesName from "../../../navigation";
+
+export const MainListItems = () => {
+    return (
+        <div>
+            {routesName.map((route: any) => (
+                <ListItem button key={route.name}>
+                    <ListItemIcon>
+                        {route.icon}
+                    </ListItemIcon>
+                    <Link to={route.path}>
+                        <ListItemText primary={route.name}/>
+                    </Link>
+                </ListItem>
+            ))}
+        </div>
+    )
+};
+```
+و آن را با هر اسمی ک می خواهیم می توانیم در کامپوننت مورد نظر `import` کنیم.
