@@ -8,8 +8,6 @@ author: mamad
 
 بعد برای اینکه یه استور خالی درست کنیم از کد های زیر استفاده می کنیم: (همچنین مستقیما به **redux devtools** هم وصل میشه)
 
-<div dir="ltr">
-
 ```javascript
     import {configureStore} from '@reduxjs/toolkit'
 
@@ -18,11 +16,7 @@ author: mamad
     })
 ```
 
-</div>
-
 حالا فقط کافیه که توو مسیر `src/index.js` کل اپ مون رو داخل استور قرار بدیم تا هرجای اپ به استورمون دسترسی داشته باشیم:
-
-<div dir="ltr">
 
 ```javascript
     import React from 'react'
@@ -40,8 +34,6 @@ author: mamad
     )
 ```
 
-</div>
-
 حالا این فایل رو می سازیم : `src/features/counter/counterSlice.js` بعدش میاییم از `createSlice` استفاده می کنیم
 
 این فایل به یک اسم رشته ای برای نامگذاری، یک مقدار اولیه و یک یا چند تابع reducer برای تغییرات روی متغییرمان نیاز دارد
@@ -50,9 +42,7 @@ author: mamad
 
 حال از کد های زیر برای پیکربندی استفاده می کنیم:
 
-<div dir="ltr">
-
-```javascript
+```js
     import {createSlice} from '@reduxjs/toolkit'
 
     export const counterSlice = createSlice({
@@ -83,13 +73,9 @@ author: mamad
     export default counterSlice.reducer
 ```
 
-</div>
-
 حالا برای اینکه این slice که ساختیم رو به `store/index.js` بدیم باید به صورت زیر عمل کنیم:
 
-<div dir="ltr">
-
-```javascript
+```js
     import { configureStore } from '@reduxjs/toolkit'
     import counterReducer from '../features/counter/counterSlice'
 
@@ -100,13 +86,9 @@ author: mamad
 })
 ```
 
-</div>
-
 حالا برای اینکه یه کامپوننت تست درست کنیم، توو `src/features/counter/Counter.js` یه فایل می سازیم و بعدش اونو توو `App.js` استفاده می کنیم: ( حتما توابع درون dispatch ها با () باشد. )
 
-<div dir="ltr">
-
-```javascript
+```js
     import React from 'react'
     import { useSelector, useDispatch } from 'react-redux'
     import { decrement, increment } from './counterSlice'
@@ -137,13 +119,9 @@ author: mamad
 }
 ```
 
-</div>
-
 حال اگر بخواهیم کدمان را به صورت async بنویسیم (مثلا برای لاگین و ... که نیاز است اول داده ها را داشته باشیم سپس بر اساس داده ها چیزی را رندر کنیم) باید به صورت زیر عمل کنیم:
 
-<div dir="ltr">
-
-```javascript
+```js
     import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
     const initialState= {
@@ -204,15 +182,11 @@ author: mamad
     export default counterSlice.reducer;
 ```
 
-</div>
-
 توابع extraReducer و createAsyncThunk فقط برای عملیات async استفاده می شود
 
 هرگاه بخواهیم هنگام reject شدن کل داده های ارور را برای ما برگرداند، باید به صورت زیر عمل کنیم
 
-<div dir="ltr">
-
-```javascript
+```js
     import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
     const initialState= {
@@ -284,5 +258,3 @@ author: mamad
 
     export default counterSlice.reducer;
 ```
-
-</div>

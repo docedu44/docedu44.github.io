@@ -20,7 +20,7 @@
 }
 
 /* change direction of all of the div tag which has class with 'CodeBlock-' at the end */
-:root div[class$="CodeBlock-"] {
+:root div[class^="codeBlockContent"] {
   direction: ltr;
 }
 
