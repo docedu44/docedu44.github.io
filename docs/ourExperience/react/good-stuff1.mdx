@@ -82,3 +82,24 @@ title: نکات react - بخش 1
     }, [])
 ```
 
+🎉 هنگامی ک بخواهیم یک آبجکت را از یک آرایه بیرون بکشیم و یک پراپرتی از آن را تغییر دهیم، می توانیم از 2 روش زیر استفاده کنیم:
+
+```jsx
+  const [persons, setPersons] = useState([
+     { key: 1, name: "محمد فرهادی", completed: false },
+    { key: 2, name: "اتابک هوشنگی", completed: false }]);
+
+  const completedHandler = (key) => {
+    const allPerson = [...persons];
+    //! Way 1
+    // const personIndex = allPerson.findIndex(person => person.key === key);
+    // const person = allPerson[personIndex];
+    // person.completed = !person.completed;
+    // allPerson[personIndex] = person;
+    // setPersons(allPerson);
+    //! Way 2
+    const person = allPerson.find((person) => person.key === key);
+    person.completed = !person.completed;
+    setPersons(allPerson);
+  };
+```

@@ -106,7 +106,19 @@ const EventComponent: React.FC = () => {
     const inputRef = useRef<HTMLInputElement | null>(null);
 ```
 
+🎉 اگر در `tsconfig.json` بجای `jsx: preserve` یا `jsx: react` از `jsx: react-jsx` استفاده کنیم، دیگر نیازی ب `import` کردن `react` در همه کامپوننت ها نیست ( این قابلیت از ورژن 17 به بعد ب `react` اضافه شده است )
 
+🎉 هرگاه بخواهیم در یک آبجکت در `interface` کاری کنیم ک بتوان ب صورت دلخواه، در جاهای مختلف از پراپرتی های مختلف استفاده کنیم، باید ب صورت زیر عمل کنیم:
 
-
-
+```ts
+export interface IRoutes {
+    path: string,
+    component: any,
+    layout: LayoutsEnum,
+    meta?: {
+        authRequired: boolean,
+        [propName: string]: unknown // propName is just a name
+    },
+    children?: IRouteChildren[]
+}
+```

@@ -52,6 +52,8 @@ module.exports = {
                     'ourExperience/react/tsx/dynamic-generate-route',
                     'ourExperience/react/redux/reducers',
                     'ourExperience/react/redux/ts-in-redux',
+                    'ourExperience/react/test-in-react-next/ts-jest',
+                    'ourExperience/react/test-in-react-next/testing-react-library',
                 ],
             },
             {
@@ -66,6 +68,7 @@ module.exports = {
                 label: 'Dependencies',
                 items: [
                     'ourExperience/dependencies/auth0',
+                    'ourExperience/dependencies/git',
                 ],
             },
             {
@@ -87,6 +90,7 @@ module.exports = {
                 label: 'react-native',
                 items: [
                     'ourExperience/react-native/react-native1',
+                    'ourExperience/react-native/react-native-tags-1',
                     'ourExperience/react-native/react-native-packages',
                 ],
             },
@@ -110,6 +114,7 @@ module.exports = {
                     'ourExperience/english/grammar/grammar2',
                     'ourExperience/english/grammar/grammar3',
                     'ourExperience/english/grammar/grammar4',
+                    'ourExperience/english/grammar/learn1',
                 ],
             },
             {

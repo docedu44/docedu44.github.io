@@ -1,0 +1,21 @@
+---
+id: git
+title: Git
+---
+
+🎉 برای حذف یک `branch` باید به صورت زیر عمل کنیم:
+
+```shell
+# delete branch from repo
+git push [remote name] --delete [branch name]
+
+# delete branch locally
+git -d [branch name]
+```
+
+🎉 هرگاه بخواهیم به یک کامیت خاص برگردیم و کامیت های بعد از آن برایمان مهم نباشد، میتوانیم از کد زیر استفاده کنیم تا مستقیما به آنجا برویم و `HEAD` را به آن `commit` تغییر دهیم:
+
+```shell
+# reset HEAD to the desired commit
+git reset --hard [commit SHA id]
+```

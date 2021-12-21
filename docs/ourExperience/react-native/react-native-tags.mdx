@@ -1,0 +1,158 @@
+---
+id: react-native-tags-1
+title: تگ ها - بخش 1
+---
+
+### تگ ها
+
+`View`:
+معادل همان `div` می باشد که برای مشخص کردن هر بخش از آن استفاده میکنیم و ب صورت پیش فرض `flex` با دایرکشن `column` و `justifyContent` ب صورت `flex-start` و `alignItems` هم به صورت `stretch` می باشد.
+
+✨ هنگامی ک `flex: 1` قرار میدهیم برای یک `View` یی ک والد همه تگ ها می باشد، کل فضای صفحه را ب خود اختصاص می دهد و مانند `height: 100vh` می باشد
+
+✨ همیشه سعی شود برای المان هایی ک لازم دارند ک تمام فضای در اختیارشان را بگیرند از `flex: 1` استفاده شود، زیرا بعضی مواقع ک المان والد از `padding` و `margin` استفاده می کند، موارد اضافه فرزند، پوش می شوند زیر المان والد و دیده نمی شوند.
+
+`Text`:
+معادل همان `p` می باشد که برای قرار دادن متن هایمان از آن استفاده می کنیم.
+
+`TouchableOpacity`
+در واقع توسط این تگ می توان المان هایی ماننده `Image` و `Text` را `touchable` کنیم و از رویداد هایی ماننده `onPress` برای آن ها استفاده کنیم، ما چندین مورد از این تگ با نام های مختلف داریم ک در واقع بعد از کلمه `Touchable` هر چیزی بیاید یعنی قرار است بعد از تاچ شدن، انیمیشنی مربوط ب آن پراپرتی اجرا شود ک در اینجا یعنی انیمیشنی مربوط ب `opacity` هنگام تاچ اجرا می شود، همچنین می توان ب آن ها استایل هم داد.
+
+```jsx
+  const handleDelete = (id) => {
+        // const filtered = masters.filter(master => master.id !== id);
+        // setMasters(filtered)
+        setMasters((state) => state.filter(master => master.id !== id)) // خود ستر یک کال بک فانکشن قبول میکند ک گتر را به ما میدهد ک میتوان ب جای 2 خط بالا نوشت
+  }
+    return(
+        <View style={styles.container}>
+            <FlatList
+            keyExtractor={item => item.id}
+            data={masters}
+            // numColumns={2}
+            horizontal={false}
+            renderItem={({item}) => (
+                <TouchableOpacity onPress={() => handleDelete(item.id)}>
+                    <Text style={styles.card}>{item.fullname}</Text>
+                </TouchableOpacity>
+            )}>
+    )
+```
+
+✨ به صورت مستقیم نمی توان از `onPress` روی `Text` و `View` استفاده کرد.
+
+`ScrollView`:
+اگر یک تگ `View` اندازه اش بزرگ تر از صفحه باشد، چ افقی و چ عمودی، اسکرول نمی شود و باید بجای آن از این تگ استفاده کنیم.
+
+`FlatList`:
+مانند تگ `ScrollView` می باشد با این فرق ک ما از این بگ بیشتر برای زمانی ک بخواهیم روی لیستی حلقه بزنیم استفاده میکنیم ک ب ما آپشن های زیر رو میده و خیلی از کار هارو انجام میده ک بر خلاف `ScrollView` ک باید کل حلقه رو خودمون بنویسیم، این تگ خودش همه چیز رو هندل میکنه و پرفورمنس بهتری هم داره.
+
+```jsx
+    return (
+        <View style={styles.container}>
+            <FlatList
+                keyExtractor={item => item.id}
+                data={masters} // آرایه ای از آبجکت ها
+                // numColumns={2} // تعداد ستون های نمایشی در حالت عمودی
+                horizontal={false} // تبدیل به حالت افقی
+                renderItem={({item}) => ( // حلقه روی آرایه و نمایش تگ مورد نظر
+                    <Text style={styles.card}>{item.fullname}</Text>
+                )}>
+        </View>
+    )
+```
+
+`onChangeText`:
+یک `event` می باشد ک مانند `onChange` عمل می کند، با این فرق ک این تگ دقیقا مقدار داخل `input` را ب ما بر میگرداند اما `onChange` یک آبجکت با نام `event` بر میگرداند ک باید از داخل `target` خودمان `value` را بیرون بکشیم.
+
+```jsx
+return (
+    <TextInput style={styles.input} placeholder="اسم جدید" placeholderTextColor="darkgrey" onChangeText={setPerson} value={person}/> // OR onChangeText={val => setPerson(val)}
+)
+```
+
+`keyboard`
+یک تابع مخصوص خود `react native` می باشد ک متد های مختلفی دارد، مثلا توسط متد `()dismiss` بعد از تایپ کردن و زدن دکمه `submit`، کیبورد بسته می شود.
+
+```jsx
+  const submitHandler = () => {
+    if(person.length >= 3) {
+      setPersons((state) => [...state, {name: person, key: Math.floor(Math.random() * 1000)}]);
+      setPerson("");
+      Keyboard.dismiss()
+    }
+  }
+```
+
+`Alert`
+یکی دیگر از کامپوننت های `RN` می باشد ک خطا ها را نمایش می دهد ک برای نمایش خطا باید از متد `()alert` استفاده کنیم.
+
+```jsx
+  const submitHandler = () => {
+    if(person.length >= 3) {
+      setPersons((state) => [...state, {name: person, key: Math.floor(Math.random() * 1000)}]);
+      setPerson("");
+      Keyboard.dismiss();
+    } else {
+      Alert.alert(
+          "ارور",
+          "نام نباید کمتر از 3 کاراکتر باشد",
+          [{text: "فهمیدم", onPress: () => console.log("ok")}]
+      )
+    }
+  }
+```
+
+`TouchableWithoutFeedback`
+می توان تمام کد های مثلا صفحه ای ک `input` داریم را درون این کامپوننت قرار دهیم تا هر موقع کیبورد ما باز بود و هرجایی از صفحه ب غیر از کیبورد را لمس کردیم، صفحه بسته شود.
+
+```jsx
+return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+            <TextInput/>
+        </View>
+    </TouchableWithoutFeedback>
+)
+```
+
+`icons`
+برای اضافه کردن آیکون ب برنامه هایمان می توانیم از خود `expo` استفاده کنیم، در واقع `expo` تمام آیکون های مورد نظرمان را از تمامی لایبرری ها جمع کرده و درون خود قرار داده ک آدرس آن در زیر موجود است:
+
+☝ [expo-icon](https://docs.expo.dev/guides/icons/)
+
+`custom font`
+برای اضافه کردن فونت های سفارشی میتوان
+
+☝ [custom fonts](https://docs.expo.dev/guides/using-custom-fonts/)
+
+فونت ها فقط از 2 فرمت بیشتر استفاده میکنند: `ttf` و `otf` ( در کل دومی بهتر است ! )
+
+برای اضافه کردن فونت ها باید در کامپوننت اصلی ( **app** ) آن را اضافه کنیم ک روش های مختلفی برای اینکار وجود دارد ک میتوان از لینک بالا آن ها را مشاهده کرد.
+
+در روش اول می توان ب این صورت ابتدا موارد مورد نیاز را اضافه کرد:
+
+```shell
+npm i expo-font expo-app-loading
+```
+
+```jsx
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+
+export default function App() {
+  let [fontsLoaded] = useFonts({
+    "yekan": require('./assets/fonts/byekan.otf'),
+  });
+
+  if (fontsLoaded) {
+    return (
+        <View>...</View>
+    );
+  } else {
+    <AppLoading />
+  }
+}
+```
+
+باید در نظر داشت ک نمی توان از `fontWeight` به صورت `bold` برای فونتی ک بولد ندارد استفاده کنیم.
