@@ -62,6 +62,9 @@ title: تگ ها - بخش 1
     )
 ```
 
+`SafeAreaView`
+کامپوننتی می باشد ک فقط برای `ios` می باشد و تنها فرقی ک با `View` دارد، این است ک `content` مارا دقیقا زیر `status bar` قرار می دهد ک در `View` اینگونه نیست.
+
 `onChangeText`:
 یک `event` می باشد ک مانند `onChange` عمل می کند، با این فرق ک این تگ دقیقا مقدار داخل `input` را ب ما بر میگرداند اما `onChange` یک آبجکت با نام `event` بر میگرداند ک باید از داخل `target` خودمان `value` را بیرون بکشیم.
 
@@ -156,3 +159,61 @@ export default function App() {
 ```
 
 باید در نظر داشت ک نمی توان از `fontWeight` به صورت `bold` برای فونتی ک بولد ندارد استفاده کنیم.
+
+`SectionList`
+
+توسط این کامپوننت می توان مانند `FlatList` روی موارد یک لیست حلقه بزنیم و آن ها را چاپ کنیم، با این فرق ک این کامپوننت، دارای `header` و `footer` نیز می باشد ک وقتی آن ها را برای این کامپوننت تعریف کنیم، ب صورت خودکار در پایین و بالای هر بخش قرار میگیرند
+
+```jsx
+const data = [
+  {
+    header: "mohammad farhadi",
+    data: ["js", "react", "vue", "react native"],
+    footer: "footer"
+  }
+]
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <SectionList
+        sections={data}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({item}) => (
+          <View style={styles.item}>
+            <Text style={styles.title}>{item}</Text>
+          </View>
+        )}
+        renderSectionHeader={({section: {header}}) => (
+          <Text style={styles.header}>{header}</Text>
+        )}
+        renderSectionFooter={({section: {footer}}) => (
+          <Text style={styles.header}>{footer}</Text>
+        )}
+      />
+    </View>
+  );
+}
+```
+`Image`
+
+توسط این کامپوننت می توان عکس ها را در برنامه هایمان استفاده کنیم، بهتر است عکس ها از یک منبع خارجی باشد، یعنی بهتر است کمتر از فایل های `static` استفاده کنیم ( `prop` زیادی دارد و حتما داکیومنت خوانده شود ).
+
+```jsx
+      <View>
+        <Image
+          source={{
+            uri: "https://picsum.photos/200/300",
+            width: 150,
+            height: 150,
+          }}
+          fadeDuration={1500} // هنگام لود شدن با انیمیشن لود میشود ک بر اساس میلی ثانیه است
+        />
+      </View>
+      <View style={{marginTop: 50}}>
+        <Image
+            source={testImg} // عکس ایمپورت شده
+            blurRadius={2} // میزان تاری عکس
+        />
+      </View>
+```

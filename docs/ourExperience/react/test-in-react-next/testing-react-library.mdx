@@ -8,5 +8,133 @@ title: testing react library
 
 [testing react library](https://testing-library.com/docs/queries/about)
 
-### ByRole
+2 قطعه کد زیر، یک نمونه ساده برای استفاده از تست در `react` می باشد:
+
+```tsx
+// Counter.tsx
+import React, { useState } from "react";
+interface CounterProps {
+  description: string;
+  defaultCount: number;
+}
+export default function Counter({ description, defaultCount }: CounterProps) {
+  const [count, setCount] = useState(defaultCount);
+  const [incrementor, setIncrementor] = useState(1);
+  return (
+    <div>
+      <h2>
+        DESC: {description} - DC: {defaultCount}
+      </h2>
+      <label>
+        Incrementor
+        <input value={incrementor} onChange = {e => setIncrementor(parseInt(e.target.value) || 0)} type="number" />
+      </label>
+      <button aria-label="decrement" onClick={() => setCount(count - incrementor)}>
+        -
+      </button>
+      Current Count: {count}
+      <button aria-label="increment" onClick={() => setCount(count + incrementor)}>
+        +
+      </button>
+    </div>
+  );
+}
+```
+
+```tsx
+// Counter.spec.tsx
+import { render, screen } from "@testing-library/react";
+import user from "@testing-library/user-event";
+import Counter from "./Counter";
+describe("Counter", () => {
+    describe("Initialized with defaultCount=10 and description='WWW'", () => {
+        beforeEach(() => {
+          // eslint-disable-next-line testing-library/no-render-in-setup
+          render(<Counter defaultCount={10} description="WWW" />);
+        });
+        it("renders 'Current Count: 10'", () => {
+          expect(screen.getByText("Current Count: 10")).toBeInTheDocument();
+        });
+        it("renders title as 'WWW'", () => {
+          expect(screen.getByText(/WWW/i)).toBeInTheDocument();
+        });
+        describe("When the incrementor changes to 5 and '+' button is clicked", () => {
+            beforeEach(() => {
+                user.type(screen.getByLabelText(/Incrementor/), "{selectall}5");
+                user.click(screen.getByRole("button", {name: "increment"}));
+            });
+            it("renders 'Current Count: 15'", () => {
+                expect(screen.getByText("Current Count: 15")).toBeInTheDocument();
+            })
+        });
+        describe("When the incrementor changes to 25 and '-' button is clicked", () => {
+            beforeEach(() => {
+                user.type(screen.getByLabelText(/Incrementor/), "{selectall}25");
+                user.click(screen.getByRole("button", {name: "decrement"}));
+            });
+            it("renders 'Current Count: -15'", () => {
+                expect(screen.getByText("Current Count: -15")).toBeInTheDocument();
+            })
+        });
+      });
+  describe("Initialized with defaultCount=0 and description='My Counter'", () => {
+    beforeEach(() => {
+      // eslint-disable-next-line testing-library/no-render-in-setup
+      render(<Counter defaultCount={0} description="My Counter" />);
+    });
+    it("renders 'Current Count: 0'", () => {
+      expect(screen.getByText("Current Count: 0")).toBeInTheDocument();
+    });
+    it("renders title as 'My Counter'", () => {
+      expect(screen.getByText(/my counter/i)).toBeInTheDocument();
+    });
+    describe("when - is clicked", () => {
+        beforeEach(() => {
+            user.click(screen.getByRole("button", {name: "decrement"}));
+        });
+        it("renders 'Current Count: -1'", () => {
+            expect(screen.getByText("Current Count: -1")).toBeInTheDocument()
+        })
+    });
+    describe("when + is clicked", () => {
+        beforeEach(() => {
+            user.click(screen.getByRole("button", {name: "increment"}));
+        });
+        it("renders 'Current Count: 1'", () => {
+            expect(screen.getByText("Current Count: 1")).toBeInTheDocument()
+        })
+    });
+  });
+});
+```
+
+`describe`:
+می توان برای طبقه بندی `section` های هر بخش از آن استفاده کرد ک ماننده `div` می باشد.
+
+`beforeEach`:
+از این متد برای اجرای چند خط کد ک در جاهای دیگر تکرار شده است، استفاده میکنیم ک فقط برای تمیزی کد ها می باشد.
+
+`it`:
+برای انجام تست روی هر بخشی باید از این متد استفاده کنیم و مشخص کنیم ک میخواییم کدام المان را انتخاب و سپس روی آن تست بنویسیم
+
+✨ می توان بجای `it` از `fit` استفاده کنیم و آن مخفف `focus it` می باشد ک ابتدا آن تستی ک با `fit` باشد اجرا می شود و سپس مابقی تست ها اجرا میشوند.
+
+`expect`:
+انتظارات خودمان را از تست مینویسیم، یعنی انتظار داریم ک المان انتخابی یا بخش انتخابی برای تست، چ جوابی ب ما بدهد.
+
+`user`:
+در واقع کار همان `fireEvent` را انجام میدهد اما ساختار بهتری دارد و تقریبا 99 درصد متد های `fireEvent` را در خود دارد ( مانند: `click`, `type`, `change` )
+
+`screen`:
+هرگاه بخواهیم ب المان ها در صفحه دسترسی داشته باشیم، باید از طریق این `class` ب آن ها دسترسی داشته باشیم ک خود متد های زیادی برای انتخاب الان ها ب ما میدهد.( مانند: `getByRole`, `getByText`, `toBeInTheDocument` )
+
+🎉 حتما برای تست نویسی برای هر بخشی در کد های پروژه، ب داکیومنت اول همین صفحه مراجعه شود.
+
+🎉 می توان برای انکه فقط یک فایل از تست ها اجرا شود از دستور زیر استفاده کنیم :
+
+```shell
+npm t -- counter.spec.tsx
+```
+
+### async test
 

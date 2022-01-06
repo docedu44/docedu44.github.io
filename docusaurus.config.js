@@ -1,22 +1,22 @@
 module.exports = {
-  title: 'داکیومنت',
-  tagline: 'داکیومنت های پروژه ها',
-  url: 'https://www.hamimohajer.com',
+  title: 'My Documents',
+  tagline: 'Welcome',
+  url: 'https://devsteam.ir',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  favicon: 'img/favicon.png',
+  organizationName: 'devsteam', // Usually your GitHub org/user name.
+  projectName: 'documents', // Usually your repo name.
   themeConfig: {
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),
     },
     navbar: {
-      title: 'DOC',
+      // title: 'DEVS',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/favicon.png',
       },
       items: [
         {
@@ -27,8 +27,8 @@ module.exports = {
         },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          href: 'https://devsteam.ir',
+          label: 'Devsteam',
           position: 'right',
         },
       ],
@@ -90,8 +90,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         blog: {
           showReadingTime: true,

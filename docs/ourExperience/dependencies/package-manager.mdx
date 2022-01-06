@@ -1,0 +1,39 @@
+---
+id: package-manager
+title: npm and yarn
+---
+
+🎉 به وسیله دستور زیر می توان مشخص کرد ک یک پکیج در مسیر پروژه ما، در کدام پکیج های دیگر استفاده شده است:
+
+```shell
+npm ls eslint
+```
+
+🎉 توسط دستور های زیر می توان دید ک کدام پکیج ها نیاز ب آپدیت دارند و آن ها را میتوانیم آپدیت کنیم:
+
+1. آپدیت تمام پکیج های استفاده شده در مسیر پروژه یا آپدیت پکیج های `global`
+
+```shell
+npm update
+
+npm update -g
+```
+2. نمایش تمام پکیج هایی ک برای آن ها آپدیت جدیدی آمده
+
+```shell
+npm outdated
+```
+3. آپدیت خود `npm` یا `yarn`
+
+```shell
+npm install npm@latest -g
+
+npm install yarn@latest -g
+```
+4. آپدیت یک پکیج خاص در `global` یا داخل پروژه
+
+```shell
+npm update -g <package_name>
+
+npm update <package_name> // مسیر پروژه
+```

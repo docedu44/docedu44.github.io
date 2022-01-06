@@ -1,6 +1,6 @@
 module.exports = {
     someSidebar: {
-        "تجربه های ما": [
+        "تجربه های من": [
             "ourExperience/HowWriteMDX",
             {
                 type: 'category',
@@ -69,6 +69,7 @@ module.exports = {
                 items: [
                     'ourExperience/dependencies/auth0',
                     'ourExperience/dependencies/git',
+                    'ourExperience/dependencies/package-manager',
                 ],
             },
             {
@@ -115,6 +116,7 @@ module.exports = {
                     'ourExperience/english/grammar/grammar3',
                     'ourExperience/english/grammar/grammar4',
                     'ourExperience/english/grammar/learn1',
+                    'ourExperience/english/grammar/learn-b1',
                 ],
             },
             {

@@ -65,9 +65,9 @@ npm install --save-dev @testing-library/react @testing-library/user-event @testi
 }
 ```
 
-سپس نیاز است ک فایل `jest.config.js` را نیز تغییر دهیم:
+سپس نیاز است ک فایل `jest.config.ts` را نیز تغییر دهیم:
 
-```js
+```ts
 module.exports = {
   // [...]
   testEnvironment: 'jsdom', // برای اجرا شدن تست ها باید این قسمت را نیز تغییر دهیم
@@ -96,7 +96,7 @@ it("rendres 'Hello world'", () => {
 
 [jest-setupFilesAfterEnv](https://jestjs.io/docs/configuration#setupfilesafterenv-array)
 
-```js
+```ts
 module.exports = {
   setupFilesAfterEnv: ['./jest.setup.ts']
 };
@@ -115,13 +115,13 @@ import "@testing-library/jest-dom";
 برای اینکار باید ابتدا `eslint` خود پروژه را ( در صورت وجود ) نامش را عوض کنیم ( تا از محتوای آن در `eslint` جدید استفاده کنیم ) و سپس از دستور زیر استفاده میکنیم:
 
 ```shell
-npx eslint --ini
+npx eslint --init
 ```
 
 حال در فایل جدید از کد های زیر استفاده میکنیم:
 
 ```js
-// .eslintrc.js
+// .eslintrc.ts
 module.exports = {
     "extends": [
         "eslint:recommended",
@@ -131,9 +131,9 @@ module.exports = {
         "next",
         "next/core-web-vitals"
     ],
-    // "parser": "@typescript-eslint/parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "./tsconfig.json",
+        project: ["./tsconfig.eslint.json"], // Specify it only for TypeScript files
         "ecmaFeatures": {
             "jsx": true
         },
@@ -142,9 +142,15 @@ module.exports = {
     },
     "rules": { // در این قسمت هر قانونی را می توانیم برای لینت قرار دهیم
         "@typescript-eslint/explicit-module-boundary-types": "off" // برای غیر فعال سازی گیر دادن به تایپ های تمامی فانکشن ها
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/prefer-nullish-coalescing": "error",
     }
 };
 ```
+
+✨ ممکن است بعد نصب `eslint` و `jest` در `react` به اروری مبنی بر اینکه ورژن این 2 پکیج بالا تر از پکیج های نصب شده در این اپلیکیشن می باشد ک در آن صورت باید `package-lock.json` و `yarn.lock` و `node_modules` را حذف کنیم و هم چنین از `package.json` نیز باید نام این 2 پکیج را نیز حذف کنیم و دوباره `npm i` بزنیم.
 
 همچنین چون ما فولدر اصلی `pages` در `next` را به `src` جابه جا کردیم، باید توسط دستور زیر ( فقط برای `next` ) مسیری ک `eslint` چک میکند را تغییر دهیم ( `package.json` ):
 
@@ -221,7 +227,7 @@ npx mrm@2 lint-staged
 npm i --save-dev lint-staged prettier
 ```
 
-حال باید در فولدری ک نام آن `_` می باشد، در فایل `pre-commit`، کامند اصلی آن را به کامند زیر تغییر بدهیم:
+حال باید در فولدری ک نام آن `husky.` می باشد، در فایل `pre-commit`، کامند اصلی آن را به کامند زیر تغییر بدهیم:
 
 ```text
 npm run lint-staged
@@ -278,6 +284,25 @@ module.exports = {
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   }
+}
+```
+
+🎉🎉🎉 حتما باید تمام فایل ها ( اگر از `ts` استفاده می شود ) حتما با پسوند های `ts` و `tsx` باشد، حتی `eslint.`، `babel.config` و ...، زیرا ب ما ارور `parserOption` میدهد ک مربوط ب مغایرت داشتن فرمت فایل ها می باشد.
+
+🎉 تغییرات زیر نیز باید اعمال شود روی فایل های مورد نظر یا اگر وجود ندارد، باید ساخته شوند:
+
+`tsconfig.json`
+```json
+{
+"include": ["src", "./jest.config.ts", ".eslintrc", "./babel.config"]
+}
+```
+
+`tsconfig.eslint.json`
+```json
+{
+  "extends": "./tsconfig.json",
+  "include": ["babel.config"]
 }
 ```
 
