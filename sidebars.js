@@ -1,98 +1,98 @@
 module.exports = {
     someSidebar: {
         "تجربه های من": [
-            "ourExperience/HowWriteMDX",
+            "experiences/HowWriteMDX",
             {
                 type: 'category',
                 label: 'Docker',
                 items: [
-                    'ourExperience/docker/docker-react',
+                    'experiences/docker/docker-react',
                 ],
             },
             {
                 type: 'category',
                 label: 'Nginx',
                 items: [
-                    'ourExperience/nginx/nginx-react',
+                    'experiences/nginx/nginx-react',
                 ],
             },
             {
                 type: 'category',
                 label: 'PWA',
                 items: [
-                    'ourExperience/PWA/pwa',
-                    'ourExperience/PWA/pwa_react',
+                    'experiences/PWA/pwa',
+                    'experiences/PWA/pwa_react',
                 ],
             },
             {
                 type: 'category',
                 label: 'Tailwind in Next.js',
                 items: [
-                    'ourExperience/tailwind/tailwind-next',
-                    'ourExperience/tailwind/custom-tailwind-style',
-                    'ourExperience/tailwind/responsive',
-                    'ourExperience/tailwind/hover-focus-etc',
+                    'experiences/tailwind/tailwind-next',
+                    'experiences/tailwind/custom-tailwind-style',
+                    'experiences/tailwind/responsive',
+                    'experiences/tailwind/hover-focus-etc',
                 ],
             },
             {
                 type: 'category',
                 label: 'nest.js',
                 items: [
-                    'ourExperience/nestjs/nestjs-starter',
+                    'experiences/nestjs/nestjs-starter',
                 ],
             },
             {
                 type: 'category',
                 label: 'react.js',
                 items: [
-                    'ourExperience/react/good-stuff1',
-                    'ourExperience/react/redux-tool-kit/reduxtoolkit',
-                    'ourExperience/react/redux-tool-kit/redux-toolkit-summary',
-                    'ourExperience/react/tsx/ts-in-react',
-                    'ourExperience/react/tsx/dynamic-generate-route',
-                    'ourExperience/react/redux/reducers',
-                    'ourExperience/react/redux/ts-in-redux',
-                    'ourExperience/react/test-in-react-next/ts-jest',
-                    'ourExperience/react/test-in-react-next/testing-react-library',
+                    'experiences/react/good-stuff1',
+                    'experiences/react/redux-tool-kit/reduxtoolkit',
+                    'experiences/react/redux-tool-kit/redux-toolkit-summary',
+                    'experiences/react/tsx/ts-in-react',
+                    'experiences/react/tsx/dynamic-generate-route',
+                    'experiences/react/redux/reducers',
+                    'experiences/react/redux/ts-in-redux',
+                    'experiences/react/test-in-react-next/ts-jest',
+                    'experiences/react/test-in-react-next/testing-react-library',
                 ],
             },
             {
                 type: 'category',
                 label: 'next.js',
                 items: [
-                    'ourExperience/nextjs/next-hints1',
+                    'experiences/nextjs/next-hints1',
                 ],
             },
             {
                 type: 'category',
                 label: 'Dependencies',
                 items: [
-                    'ourExperience/dependencies/auth0',
-                    'ourExperience/dependencies/git',
-                    'ourExperience/dependencies/package-manager',
+                    'experiences/dependencies/auth0',
+                    'experiences/dependencies/git',
+                    'experiences/dependencies/package-manager',
                 ],
             },
             {
                 type: 'category',
                 label: 'Hints',
                 items: [
-                    'ourExperience/hints/hint-1',
+                    'experiences/hints/hint-1',
                 ],
             },
             {
                 type: 'category',
                 label: 'vue.js',
                 items: [
-                    'ourExperience/vue/vue-tips1',
+                    'experiences/vue/vue-tips1',
                 ],
             },
             {
                 type: 'category',
                 label: 'react-native',
                 items: [
-                    'ourExperience/react-native/react-native1',
-                    'ourExperience/react-native/react-native-tags-1',
-                    'ourExperience/react-native/react-native-packages',
+                    'experiences/react-native/react-native1',
+                    'experiences/react-native/react-native-tags-1',
+                    'experiences/react-native/react-native-packages',
                 ],
             },
         ],
@@ -101,57 +101,57 @@ module.exports = {
                 type: 'category',
                 label: 'IELTS',
                 items: [
-                    'ourExperience/english/IELTS/listening',
-                    'ourExperience/english/IELTS/reading',
-                    'ourExperience/english/IELTS/speaking',
-                    'ourExperience/english/IELTS/writing',
-                    'ourExperience/english/IELTS/hints',
+                    'experiences/english/IELTS/listening',
+                    'experiences/english/IELTS/reading',
+                    'experiences/english/IELTS/speaking',
+                    'experiences/english/IELTS/writing',
+                    'experiences/english/IELTS/hints',
                 ],
             }, {
                 type: 'category',
                 label: 'Grammar',
                 items: [
-                    'ourExperience/english/grammar/grammar1',
-                    'ourExperience/english/grammar/grammar2',
-                    'ourExperience/english/grammar/grammar3',
-                    'ourExperience/english/grammar/grammar4',
-                    'ourExperience/english/grammar/learn1',
-                    'ourExperience/english/grammar/learn-b1',
+                    'experiences/english/grammar/grammar1',
+                    'experiences/english/grammar/grammar2',
+                    'experiences/english/grammar/grammar3',
+                    'experiences/english/grammar/grammar4',
+                    'experiences/english/grammar/learn1',
+                    'experiences/english/grammar/learn-b1',
                 ],
             },
             {
                 type: 'category',
                 label: 'Tips',
                 items: [
-                    'ourExperience/english/cues/cues1',
+                    'experiences/english/cues/cues1',
                 ],
             },
             {
                 type: 'category',
                 label: 'Questions',
                 items: [
-                    'ourExperience/english/important/importantQuestions',
+                    'experiences/english/important/importantQuestions',
                 ],
             },
             {
                 type: 'category',
                 label: 'Words',
                 items: [
-                    'ourExperience/english/programming-words/programming-words',
+                    'experiences/english/programming-words/programming-words',
                 ],
             },
             {
                 type: 'category',
                 label: 'ABBR',
                 items: [
-                    'ourExperience/english/programming-abbr/programming-abbr',
+                    'experiences/english/programming-abbr/programming-abbr',
                 ],
             },
             {
                 type: 'category',
                 label: 'Hints',
                 items: [
-                    'ourExperience/english/other/hints',
+                    'experiences/english/other/hints',
                 ],
             },
         ],
@@ -160,22 +160,22 @@ module.exports = {
                 type: 'category',
                 label: 'html-css',
                 items: [
-                    'ourExperience/interesting-code/html-css/htmlCss1',
-                    'ourExperience/interesting-code/html-css/bem',
+                    'experiences/interesting-code/html-css/htmlCss1',
+                    'experiences/interesting-code/html-css/bem',
                 ],
             },
             {
                 type: 'category',
                 label: 'scss',
                 items: [
-                    'ourExperience/interesting-code/scss/scss1',
+                    'experiences/interesting-code/scss/scss1',
                 ],
             },
             {
                 type: 'category',
                 label: 'js',
                 items: [
-                    'ourExperience/interesting-code/js/js1',
+                    'experiences/interesting-code/js/js1',
                 ],
             },
         ],
