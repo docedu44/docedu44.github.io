@@ -74,6 +74,14 @@ module.exports = {
             },
             {
                 type: 'category',
+                label: 'etc',
+                items: [
+                    'experiences/etc/flutter/flutter-starter',
+                    'experiences/etc/flutter/flutter-widgets',
+                ],
+            },
+            {
+                type: 'category',
                 label: 'Hints',
                 items: [
                     'experiences/hints/hint-1',
@@ -115,8 +123,9 @@ module.exports = {
                     'experiences/english/grammar/grammar2',
                     'experiences/english/grammar/grammar3',
                     'experiences/english/grammar/grammar4',
-                    'experiences/english/grammar/learn1',
+                    'experiences/english/grammar/learn-a2',
                     'experiences/english/grammar/learn-b1',
+                    'experiences/english/grammar/learn-b2',
                 ],
             },
             {
