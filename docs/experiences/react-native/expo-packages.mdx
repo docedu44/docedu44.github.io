@@ -1,0 +1,37 @@
+---
+id: expo-packages
+title: expo پکیج های
+---
+
+## expo packages
+### expo-constants
+توسط این پکیج ب اطلاعات زیادی در مورد دستگاهی ک نرم افزار ما روی آن نصب می شود، دسترسی داریم مانند ارتفاع استاتوس بار، فونت های درون دستگاه، نوع دستگاه، سیستم عامل و ... ک می توان ب صورت زیر آن را نصب کرد:
+```shell
+expo install expo-constants
+```
+و می توان ب این صورت از آن استفاده کرد:
+```jsx
+import Constants from "expo-constants"
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text>I love React Native ❤</Text>
+    </View>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    marginTop: Constants.statusBarHeight // در اندروید برابر 25 است
+  },
+});
+```
+### expo-keep-awake
+توسط این پکیج می توان مشخص کرد هنگام اجرا شدن یا وارد شدن به صفحه خاصی، صفحه گوشی تا زمان اجرا بودن یا ئر آن صفخه بودن، خاموش نشود
+
+بهتر است در صفخه یا هنکام اجرا شدن تابع خاصی این اتفاق بیوفتد و بهتر است در کامپوننت اصلی، `app` آن را قرار ندهیم.
+```jsx
+    import { useKeepAwake } from "expo-keep-awake";
+    export const Timer = () => {
+        useKeepAwake()
+    }
+```

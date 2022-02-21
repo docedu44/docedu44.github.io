@@ -1,0 +1,32 @@
+---
+id: react-starter
+title: react
+---
+
+## install
+برای نصب بهتر است ک خود `create-react-app` را از گلوبال حذف کنیم و بجای آن از `npx` استفاده کنیم تا همیشه آخرین نسخه را برای ما دانلود کند:
+```shell
+npm un -g create-react-app
+# or
+yarn global remove create-react-app
+```
+```shell
+npx create-react-app first-project
+```
+
+## packages
+### router
+برای نصب روتر باید از دستور زیر استفاده کنیم:
+```shell
+yarn add react-router-dom
+```
+حال باید در `index.js` از آن استفاده کنیم:
+```jsx
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
+```
+حال می توان همه جای برنامه از `Routes` استفاده کنیم

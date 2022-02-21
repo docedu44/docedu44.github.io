@@ -10,7 +10,7 @@ title: test and eslint
 [ts-jest](https://kulshekhar.github.io/ts-jest/docs/getting-started/installation)
 
 ```shell
-npm install --save-dev jest typescript ts-jest @types/jest
+yarn add jest typescript ts-jest @types/jest -D
 ```
 
 سپس توسط کد زیر می توان فایل کانفیگ آن را به پروژه اضافه کرد:
@@ -51,7 +51,7 @@ it("Summing 5 and 2 will return 7", ()=> {
 [react testing library](https://testing-library.com/docs/react-testing-library/intro)
 
 ```shell
-npm install --save-dev @testing-library/react @testing-library/user-event @testing-library/dom @testing-library/jest-dom
+yarn add @testing-library/react @testing-library/user-event @testing-library/dom @testing-library/jest-dom -D
 ```
 
 حال برای اینکه کامپوننت های `react` ک همراه با `spec.tsx.*` هستند نیاز است تا یک فایل به نام `tsconfig.jest.json` بسازیم و کد های زیر را در آن قرار دهیم:
@@ -150,7 +150,7 @@ module.exports = {
 };
 ```
 
-✨ ممکن است بعد نصب `eslint` و `jest` در `react` به اروری مبنی بر اینکه ورژن این 2 پکیج بالا تر از پکیج های نصب شده در این اپلیکیشن می باشد ک در آن صورت باید `package-lock.json` و `yarn.lock` و `node_modules` را حذف کنیم و هم چنین از `package.json` نیز باید نام این 2 پکیج را نیز حذف کنیم و دوباره `npm i` بزنیم.
+✨ ممکن است بعد نصب `eslint` و `jest` در `react` به اروری مبنی بر اینکه ورژن این 2 پکیج بالا تر از پکیج های نصب شده در این اپلیکیشن می باشد ک در آن صورت باید `package-lock.json` و `yarn.lock` و `node_modules` را حذف کنیم و هم چنین از `package.json` نیز باید نام این 2 پکیج را نیز حذف کنیم و دوباره `npm i` یا `yarn` بزنیم.
 
 همچنین چون ما فولدر اصلی `pages` در `next` را به `src` جابه جا کردیم، باید توسط دستور زیر ( فقط برای `next` ) مسیری ک `eslint` چک میکند را تغییر دهیم ( `package.json` ):
 
@@ -169,7 +169,7 @@ module.exports = {
 [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest)
 
 ```shell
-npm i --save-dev eslint-plugin-jest
+yarn add eslint-plugin-jest -D
 ```
 
 ```js
@@ -193,7 +193,7 @@ module.exports = {
 [eslint-plugin-testing-library](https://www.npmjs.com/package/eslint-plugin-testing-library)
 
 ```shell
-npm i --save-dev eslint-plugin-testing-library
+yarn add eslint-plugin-testing-library -D
 ```
 
 ```js
@@ -224,7 +224,7 @@ npx mrm@2 lint-staged
 این پکیج، 2 پیش نیاز دارد و باید آن ها را نیز نصب کنیم:
 
 ```shell
-npm i --save-dev lint-staged prettier
+yarn add lint-staged prettier -D
 ```
 
 حال باید در فولدری ک نام آن `husky.` می باشد، در فایل `pre-commit`، کامند اصلی آن را به کامند زیر تغییر بدهیم:
@@ -256,7 +256,7 @@ npm run lint-staged
 
 ### coverage
 
-حال برای اینکه تست در حالت `ci` را نیز اضافه کنیم وارد از کد های زیر در `jest.config.js` استفاده میکنیم
+حال برای اینکه تست در حالت `ci` را نیز اضافه کنیم باید از کد های زیر در `jest.config.js` استفاده کنیم
 
 [jest-coveragethreshold](https://jestjs.io/docs/configuration#coveragethreshold-object)
 

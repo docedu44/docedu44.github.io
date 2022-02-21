@@ -4,17 +4,14 @@ title: Auth0 in React
 ---
 
 در واقع `auth0` یک پکیج می باشد ک توسط آن می توان لاگین و رجیستر سایت خودمان را به راحتی بسازیم و برای نصب باید از کد زیر استفاده کنیم:
-
-```text
+```shell
 yarn add @auth0/auth0-react
 ```
-
 1. برای شروع باید ابتدا وارد سایت آن شویم و در آنجا ثبت نام کنیم
 2. سپس به تب `Applications` می رویم و روی `Applications` کلیک میکنیم
 3. در صفحه باز شده، روی دکمه `Create Application` کلیک می کنیم و `app` و تکنولوژی ک در آن به کار می بریم را انتخاب میکنیم و یک اسم برای آن تعیین می کنیم.
 4. حال در 3 بخش `Allowed Logout URLs`, `Allowed Callback URLs` و `Allowed Web Origins` آدرس وب سایتمان را می دهیم یا اگر روی سیستم خودمان است، آدرس `localhost:3000` را می دهیم.
 5. حال باید در کد هایمان از `domain`, `client id` و `client secret` استفاده کنیم
-
 ```jsx
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -29,9 +26,7 @@ ReactDOM.render(
     document.getElementById('root')
 );
 ```
-
 6. حال می توان از قابلیت ها `auth0` در کد هایمان استفاده کنیم:
-
 ```jsx
 import {useAuth0} from "@auth0/auth0-react";
 
@@ -57,10 +52,8 @@ function App() {
                 <pre style={{textAlign: "start"}}>{JSON.stringify(user, null, 2)}</pre>
             )}
         </div>
-    );
-}
+    );}
 ```
-
 `loginWithPopup`: در واقع توسط این تابع می توان یک پنجره باز کرد ک کاربر در همان صفحه لاگین یا رجیستر کند.
 
 `loginWithRedirect`: کاربر را به یک صفحه دیگر انتقال میدهد و بعد لاگین کاربر را به صفحه مورد نظر انتقال می دهد.

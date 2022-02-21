@@ -1,0 +1,121 @@
+---
+id: react-native-features
+title: features
+---
+
+## Responsive
+### Platform & StatusBar
+ما می توانیم توسط `Platform` یکسری استایل ها و قابلیت ها را بر اساس `os` یا `version`یا موارد دیگر تغییر دهیم و برنامه خودمان را رسپانسیو کنیم:
+```jsx
+import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.textStyle}>mamad</Text>
+      <StatusBar style="auto" barStyle='dark-content' backgroundColor="white"/>
+    </View>
+  );}
+const styles = StyleSheet.create({
+  container: {
+    // marginTop: StatusBar.currentHeight,
+    justifyContent: "center", alignItems: "center", backgroundColor: "whitesmoke",
+  },
+  textStyle: {
+    backgroundColor: "lightgray", padding: 10,
+    ...Platform.select({ // باید ب این صورت در ادامه استایل های ک کلاس آن را نوشت
+      ios: {
+          // require("./ios.js")
+        fontSize: 20, fontFamily: "Avenir", color: "green",
+      },
+      android: {
+          // require("./android.js")
+        fontSize: 18, fontFamily: "Roboto", color: "tomato",
+      },
+      default: {
+        fontSize: 18, color: "blue",
+      },
+    }),
+  },
+});
+```
+همچنین می توان از `StatusBar` برای قرار دادن محتوای برنامه یمان زیر قسمت بالایی صفحه گوشی استفاده کرد ک میتوان از آن ب عنوان یک کامپوننت استفاده کرد و یا از آن در استایل ها و بخش های مختلف استفاده کرد.
+
+همچنین می توان فایل های رسپانسیومان را جدا بنویسیم و آن ها را مانند کد ک کامنت شده است، در استایل های مان `require` کنیم.
+
+همچنین می توان بجای استفاده از کامپوننت `StatusBar` ب صورت جدا مانند `StatusBar.currentHeight`در قسمت استایل ها استفاده کرد و محتوا را پایین قسمت بالایی گوشی قرار دهیم.
+
+### Dimensions
+ما برای اینکه ب ابعاد گوشی کاربر دسترسی داشته باشیم باید از `Dimensions` استفاده کنیم
+ک هم اندازه `screen` ک معمولا ارتفاع بیشتری دارد (بخاطر استاتوس بار و نوار پایین گوشی) و
+هم اندازه `window` ک دقیقا اندازه قسمت مورد استفاده هر برنامه است را به ما می دهد.
+
+🎉 همچنین می توان از هوک `()useWindowDimensions` نیز استفاده کنیم ک دقیقا اندازه `window` را ب ما می دهد و هنگام تغییر `orientation`، یکبار کامپوننت را رندر می کند.
+```jsx
+import { Dimensions, useWindowDimensions } from "react-native";
+export default function App() {
+  const {fontScale, height, scale, width} = useWindowDimensions();
+  const screen = Dimensions("screen");
+  const window = Dimensions("window");
+```
+🎉 همچنین اگر می خواهیم برنامه ای برای دستگاه هایی ک اندازه صفحه نمایش آن ها قابل تغییر است بنویسیم، می توانیم از `addEventListener` درون `Dimensions` نیز استفاده کنیم.
+
+🎉 همچنین برای تجربه بهتر و استفاده از موارد بیشتر، بهتر است از پکیج `react-native-community/hooks@` استفاده شود ک در قسمت پکیج ها توضیح داده شده است.
+
+### android & ios
+برای اینکه استایل ها و کد هایی ک می نویسیم برای هر پلتفرمی جدا باشد، می توانیم ب 2 روش زیر عمل کنیم:
+
+1. خود RN یک قابلیت دارد ک اگر در انتهای یک کامپوننت از کلمات `ios` یا `android` استفاده کنیم، بر اساس آن کد های ما را نمایش می دهد یعنی مثلا کد `ios` را در آن سیستم عامل فقط نمایش می دهد
+
+ابتدا باید یک فولدر در فولدر `components` بسازیم و سپس درون آن یک فایل بدون هیچ پسوندی و با نام دلخواه مان می سازیم
+```jsx
+// app/components/AppText/AppText.js
+const AppText = ({children}) => {
+  return <Text>{children}</Text>
+}
+export default AppText
+```
+حال 2 فایل دیگر با نام های `AppText.ios.js` و `AppText.android.js` می سازیم و کد ها و استایل های مربوطه را در آن ها قرار می دهیم:
+```jsx
+// app/components/AppText/AppText.ios.js
+const AppText = ({children}) => {
+  return <Text style={styles.text}>{children}</Text>
+}
+export default AppText
+const styles = StyleSheet.create({
+    text: {
+        fontFamily: "Avenir", fontSize: 20, fontWeight: "bold", color: "tomato"
+    }
+})
+```
+```jsx
+// app/components/AppText/AppText.android.js
+const AppText = ({children}) => {
+  return <Text style={styles.text}>{children}</Text>
+}
+export default AppText
+const styles = StyleSheet.create({
+    text: {
+        fontFamily: "Roboto", fontSize: 25, fontWeight: "bold", color: "dodgerblue", lineHeight: 30
+    }
+})
+```
+حال کافیست در هر کامپوننتی ک می خواهیم، کامپوننت اصلی این فایل ها ک همان `AppText.js` می باشد را صدا بزنیم و خودش بر اساس سیستم عامل تشخیص می دهد ک کدام فایل را باید اجرا کند.
+
+2. همچنین می توان بجای این موارد، کنار هر کامپوننتی یک فایل `styles.js` قرار دهیم و بجای اینکه استایل ها را درون هر فایل بنویسیم، درون یک فایل جدا قرار دهیم(بخاطر استفاده از `Platform` و نوشتن استایل های جدا برای هر سیستم عامل، استایل ها زیاد می شود و بهتر است ک آن را جدا کنیم.)
+```jsx
+// app/components/AppText/styles.js
+import { Platform, StyleSheet } from "react-native";
+export const styles = StyleSheet.create({
+  text: {
+    ...Platform.select({
+      ios: {
+        fontFamily: "Avenir", fontSize: 20, fontWeight: "bold", color: "tomato",
+      },
+      android: {
+        fontFamily: "Roboto", fontSize: 25, fontWeight: "bold", color: "dodgerblue", lineHeight: 30,
+      },
+    }),
+  },
+});
+```
+حال می توان در فایل اصلی ک `AppText.js` می باشد از آن استفاده کنیم.

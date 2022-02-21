@@ -43,6 +43,13 @@ module.exports = {
             },
             {
                 type: 'category',
+                label: 'html&css',
+                items: [
+                    'experiences/html-css/html-css',
+                ],
+            },
+            {
+                type: 'category',
                 label: 'react.js',
                 items: [
                     'experiences/react/good-stuff1',
@@ -52,8 +59,16 @@ module.exports = {
                     'experiences/react/tsx/dynamic-generate-route',
                     'experiences/react/redux/reducers',
                     'experiences/react/redux/ts-in-redux',
-                    'experiences/react/test-in-react-next/ts-jest',
-                    'experiences/react/test-in-react-next/testing-react-library',
+                    'experiences/react/react/react-starter',
+                ],
+            },
+            {
+                type: 'category',
+                label: 'react-test',
+                items: [
+                    'experiences/react-test/ts-jest',
+                    'experiences/react-test/testing-react-library',
+                    'experiences/react-test/udemy-testing-react-library',
                 ],
             },
             {
@@ -70,6 +85,7 @@ module.exports = {
                     'experiences/dependencies/auth0',
                     'experiences/dependencies/git',
                     'experiences/dependencies/package-manager',
+                    'experiences/dependencies/scss',
                 ],
             },
             {
@@ -99,8 +115,10 @@ module.exports = {
                 label: 'react-native',
                 items: [
                     'experiences/react-native/react-native1',
+                    'experiences/react-native/react-native-features',
                     'experiences/react-native/react-native-tags-1',
                     'experiences/react-native/react-native-packages',
+                    'experiences/react-native/expo-packages',
                 ],
             },
         ],

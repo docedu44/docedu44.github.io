@@ -1,21 +1,9 @@
 ---
 id: react-native-packages
-title: پکیج ها
+title: RN پکیج های
 ---
 
-## expo-keep-awake
-توسط این پکیج می توان مشخص کرد هنگام اجرا شدن یا وارد شدن به صفحه خاصی، صفحه گوشی تا زمان اجرا بودن یا ئر آن صفخه بودن، خاموش نشود
-
-بهتر است در صفخه یا هنکام اجرا شدن تابع خاصی این اتفاق بیوفتد و بهتر است در کامپوننت اصلی، `app` آن را قرار ندهیم.
-```jsx
-    import { useKeepAwake } from "expo-keep-awake";
-
-    export const Timer = () => {
-        useKeepAwake();
-        ...
-    }
-```
-
+## React Native packages
 ## Navigation
 می توان توسط این پکیج `routing` را در `react native` پیاده سازی کرد ک حتما داکیومنت اصلی آن خوانده شود:
 
@@ -35,9 +23,14 @@ yarn add react-native-screens react-native-safe-area-context
 
 🎉 در `react native` به 2 صورت می توان از `navigation` استفاده کرد ک 1. `Drawer` و 2. `stack` می باشد ک اولی به صورت منوی کشویی می باشد و دومی هم می توان ب صورت لینک در جاهای مختلف برنامه استفاده کرد.
 
-در حالت کلی در این پکیج ما فقط `Drawer` را داریم و برای استفاده از `Stack` باید آن را نصب کنیم:
+### Stack
+برای استفاده از `Stack` باید آن را نصب کنیم:
 ```shell
 yarn add @react-navigation/stack
+```
+🎉 حتما بعد از نصب این پکیج باید پکیج زیر را نیز توسط خود `expo` نصب کنیم تا بر اساس آخرین ورژن مورد نیاز برای `expo sdk` آن را نصب کند:
+```shell
+expo install react-native-gesture-handler
 ```
 حال باید ب صورت زیر عمل کرد:
 
@@ -220,4 +213,258 @@ export default function App() {
 برای استفاده از `drawer` باید مانند `stack` ابتدا پکیج مربوط ب آن را از `navigation` نصب کنیم:
 ```shell
 yarn add @react-navigation/drawer
+```
+🎉 حتما بعد از نصب این پکیج باید پکیج های زیر را نیز توسط خود `expo` نصب کنیم تا بر اساس آخرین ورژن مورد نیاز برای `expo sdk` آن ها را نصب کند:
+```shell
+expo install react-native-gesture-handler react-native-reanimated
+```
+سپس بعد از نصب این 2 پکیج باید `babel.config.json` را نیز تغییر دهیم:
+```shell
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ["react-native-reanimated/plugin",],
+  };
+};
+```
+🎉 اگر با ارور زیر مواجه شدیم، باید دستور "مرحله آخر" را بزنیم:
+> Reanimated 2 failed to create a worklet, maybe you forgot to add Reanimated's babel plugin
+
+و در مرحله آخر نیز باید یک بار سرور `metro` را نیز ریست کنیم:
+```shell
+npx react-native start --reset-cache
+```
+حال می توان از این پکیج استفاده کرد:
+```jsx
+const Drawer = createDrawerNavigator();
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          drawerPosition: "right", // برای باز شدن منو از سمت راست
+          drawerStyle: { backgroundColor: "orange", }, // استایل دادن ب خود منو
+          drawerActiveTintColor: "white", // رنگ نوشته منوی اکتیو
+          drawerInactiveTintColor: "gray", // رنگ نوشته منوی غیر اکتیو
+          headerShown: true, // نمایش یا عدم نمایش منوی هدر
+          headerTitleAlign: "center",
+          drawerLabelStyle: {textAlign: "center"}, // برای استایل دادن ب تک تک آیتم های داخل منو
+          headerRight: (props) => { // اضافه کردن هر چیزی ب سمت راست هدر
+            return (
+              <View style={{marginRight: 10}}>
+                <Ionicons onPress={() => alert("mamad")} name="menu" size={32} color="black" />
+              </View>
+            )
+          },
+          headerLeft: () => {} }} // اضافه کردن هرچیزی ب سمت چپ منو
+        >
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Information" component={Information} options={{ title: "اطلاعات", headerTitle: "اطلاعات", }} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+🎉 مابقی موارد دقیقا مانند `stack` می باشد.
+
+### Bottom tab navigation
+ابتدا باید پکیج مربوط ب آن را نصب کنیم:
+```shell
+yarn add @react-navigation/bottom-tabs
+```
+🎉 فرم کلی استفاده از این 3 حالت برای `navigate` کردن شبیه ب هم هستند.
+
+حال می توان مانند بقیه حالت ها موارد لازم را استفاده کنیم:
+```jsx
+const Tab = createBottomTabNavigator();
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home}/>
+        <Tab.Screen name="Information" component={Information}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+که در قسمت پایین صفحه برای ما یک قسمت برای `navigate` می آورد ک آیکون هایش باید عوض شود و می توان آن را کامل شخصی سازی کرد:
+```jsx
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={({route}) => ({ // توسط اینکار ما می توانیم ب روت ها دسترسی داشته باشیم
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName; // توسط شرط های زیر و شرایط مختلف می توان مقدار خاصی را برای آیکون ها قرار داد
+          if(route.name === "Home") {
+            iconName = focused ? "ios-information-circle" : "ios-information-circle-outline"
+          } else if (route.name === "Information") {
+            iconName = focused ? "ios-list" : "ios-list-outline"
+          }
+          return (
+            <Ionicons name={iconName} size={size} color={color}/>
+          )
+        },
+        tabBarActiveTintColor: "tomato", // رنگ حالت اکتیو
+        tabBarInactiveTintColor: "gray", // رنگ حالت دی اکتیو
+      })}>
+        <Tab.Screen name="Home" component={Home}/>
+        <Tab.Screen name="Information" component={Information} options={{
+          title: "اطلاعات",
+          tabBarShowLabel: true, // اگر فالس باشد، هنگام فوکوش شدن دیگر لیبل آن نمایش داده نمی شود
+          tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            display: "none" // اگر وارد آن روت شویم، کل منوی پایین محو می شود
+          },
+        }}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+```
+🎉 همچنین میتوان برای تغییر آیکون ها از `options` تک تک `route` ها نیز استفاده کرد.
+
+### nested navigation
+می توان برای اینکه از چند مدل `navigation` استفاده کنیم ب صورت زیر عمل کنیم:
+```jsx
+        // App.js
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="Information" component={Information} />
+      </Stack.Navigator>
+```
+حال می توان در یکی از این صفحات اصلی، از یکی دیگر از `navigation` ها استفاده کنیم:
+```jsx
+    // Home.js
+    <Tab.Navigator>
+      <Tab.Screen name="Settings" component={Settings}/>
+      <Tab.Screen name="Profile" component={Profile}/>
+    </Tab.Navigator>
+```
+ب این صورت وقتی وارد صفحه `Home` می شویم، در قسمت پایینی صفحه می توان `Tab navigation` را ببینیم.
+
+همچنین میتوان در صفحه `Settings` یک دکمه قرار دهیم ک مارا ب `Information` ک در `Stack` می باشد ببرد:
+```jsx
+    // Settings.js
+      <Button title="Go to Information" onPress={() => navigation.navigate("Information")}/>
+```
+
+🎉 باید حواسمان باشد ک اگر از `nested navigation` استفاده کردیم، باید در نظر داشته باشیم ک `history` هر `navigation` ( دراور یا استک یا ... ) برای خودش است و تاریخچه هر تبی ک جابه جا می شویم در همان `navigation` ذخیره می شود پس نمی توان در `navigation` های دیگر ب آن یکی دسترسی داشته باشیم.
+
+🎉 باید حواسمان باشد ک هر `navigation` آپشن های مختص ب خودش را دارد
+
+🎉 همچنین ما نمی توانیم از `screen` استفاده شده در یک `navigation` به یک `screen` در یک `navigation` دیگر مقداری بفرستیم و برای حل این موضوع می توان از `context` یا `redux` استفاده کرد.
+
+🎉 در `nested navigation` در واقع `navigation` های فرزند، رویداد های `navigation` والد را ارثبری نمی کنند.
+
+🎉 همچنین `UI` نویگیتور والد بالای `UI` نویگیتور فرزند رندر می شود، به طور مثال اگر یک `Drawer` فرزند یک `Stack` باشد، هنگام باز شدن، زیر `Stack` باز می شود
+
+🎉 همچنین ما میتوانیم ب صورت زیر از حالت `nested` استفاده کنیم و برای هر چند صفحه، یک والد در نظر بگیریم:
+```jsx
+        // App.js
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="first" options={{headerShown: false}}>
+          {() => (
+            <Stack.Navigator>
+              <Stack.Screen name="Settings" component={Settings}/>
+              <Stack.Screen name="Profile" component={Profile}/>
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
+        <Tab.Screen name="second" options={{headerShown: false}}>
+          {() => (
+            <Stack.Navigator>
+              <Stack.Screen name="Home" component={Home}/>
+              <Stack.Screen name="Information" component={Information}/>
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
+```
+در این حالت `history` هر بخش درون همان تابع و `navigation` ذخیره می شود، یعنی اگر درون یک والد، به یکی از صفحات زیر مجموعه آن برویم و سپس وارد یک صفحه دیگر از یک والد دیگر شویم، هنگام برگشت باز در همان صفحه ک رفته بودیم، خواهیم رفت.
+
+🎉 همچنین می توان درون هر کامپوننت با `navigate` ب هر کدام از صفحات دیگر رفت.
+
+🎉 سعی شود ک خیلی `navigation` ها را `nested` نکنیم.
+
+### navigation life cycle
+برای اینکه هنگام هربار ورود کاربر ب یک صفحه، یک تابعی یا کدی را اجرا کنیم، چند راه وجود دارد
+```jsx
+// Profile.js
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      alert("mamad")
+    })
+  }, [navigation])
+```
+اما خود `navigation` این کد را پیشنهاد نمی دهد و خودش برای اینکار هوک های مجزا دارد:
+```jsx
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
+export default function Profile({navigation}) {
+  useFocusEffect(
+    useCallback(() => {
+      // Mount
+      alert("Focused");
+      // Unmount
+      return () => {
+        alert("Unfocused")
+      }
+    })
+  )}
+```
+### fullscreen modal
+می توان توسط کد های زیر یک صفحه خاص را ب حالت مودال تمام صفحه تبدیل کرد:
+```jsx
+        <Tab.Screen name="second" options={{ headerShown: false }}>
+          {() => (
+            <Stack.Navigator>
+              <Stack.Group>
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Information" component={Information} />
+              </Stack.Group>
+              <Stack.Group screenOptions={{ presentation: "modal" }}> {/*در واقع 3 حالت دارد ک پیش فرض آن همان کارد می باشد*/}
+                <Stack.Screen name="Modal" component={Modal} />
+              </Stack.Group>
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
+```
+🎉 همچنین می توان توسط `Stack.Group` صفحات را گروه بندی کرد و استایل های خاصی را ب هر گروه بدهیم
+
+## react-native-community/hooks@
+یکی از پکیج های عالی برای دسترسی ب موارد زیر در `React Native` می باشد:
+
+[@react-native-community/hooks](https://www.npmjs.com/package/@react-native-community/hooks)
+```shell
+yarn add @react-native-community/hooks
+```
+```text
+useAccessibilityInfo
+useAppState
+useBackHandler
+useCameraRoll => دوربین
+useClipboard => کپی کردن اطلاعات
+useDimensions => ابعاد گوشی
+useImageDimensions
+useKeyboard
+useInteractionManager
+useDeviceOrientation => عمودی یا افقی بودن گوشی
+useLayout
+```
+### useDimensions & useDeviceOrientation
+برای اینکه ابعاد گوشی و حالت افقی یا عمودی بودن آن را ب دست بیاوریم، می توان به صورت زیر از آن ها استفاده کرد:
+```jsx
+import { useDimensions, useDeviceOrientation } from "@react-native-community/hooks";
+export default function App() {
+  const {window, screen} = useDimensions(); // width - height
+  const {landscape, portrait} = useDeviceOrientation(); // true - false
+    return (
+    <View style={styles.container}>
+    <View style={{
+      width: "100%",
+      height: portrait ? "50%" : screen.height,
+      backgroundColor: "dodgerblue"}}/>
+    </View>
+  );}
 ```
